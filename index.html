@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAKATAGO ANTI SKIDDER</title>
+    <title>NO FACE NO CASE</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
-            background: #000 url("https://i.imgur.com/ZmspxIl.jpeg") center top / contain no-repeat fixed;
+            background: #000 url("https://i.imgur.com/9XbRb7L.png") center top / contain no-repeat fixed;
             position: relative;
         }
 
@@ -105,6 +105,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
+        /* ✅ Fixed Splash Screen */
         #splash {
             position: fixed;
             inset: 0;
@@ -127,6 +128,10 @@
         #splash.fade-out {
             opacity: 0;
             pointer-events: none;
+        }
+
+        #splash.hidden {
+            display: none;
         }
 
         #splash .main-text {
@@ -371,7 +376,7 @@
             </div>
         </div>
 
-        <!-- ✅ DAY ONES - DINAGDAGAN NG 3 PANG MIYEMBRO -->
+        <!-- ✅ DAY ONES - with your 3 added members -->
         <div class="section-title">DAY ONES</div>
         <div class="marquee-wrapper">
             <div class="marquee-content">
@@ -417,7 +422,7 @@
                     </div>
                     <div class="username">VinSwag</div>
                 </div>
-                <!-- ✅ MGA BAGONG DAGDAG -->
+                <!-- ✅ Your 3 added members -->
                 <div class="user-card">
                     <div class="avatar-wrap">
                         <img class="avatar" src="https://i.imgur.com/pCb2mZP.png" alt="2kPing">
@@ -439,7 +444,7 @@
                     </div>
                     <div class="username">Zero</div>
                 </div>
-                <!-- Repeat para tuloy ang ikot -->
+                <!-- Repeat for smooth scroll -->
                 <div class="user-card">
                     <div class="avatar-wrap">
                         <img class="avatar" src="https://i.imgur.com/FGirYUH.png" alt="JM">
@@ -525,22 +530,27 @@
     
 
     <script>
+        // Fallback for broken images
         document.querySelectorAll('img').forEach(img => {
             img.onerror = function() {
                 this.src = "https://cdn.discordapp.com/embed/avatars/0.png";
             };
         });
 
+        // ✅ Fixed splash click handler
         const splash = document.getElementById('splash');
         const audio = document.getElementById('bgAudio');
         audio.volume = 0.25;
 
         splash.addEventListener('click', () => {
             splash.classList.add('fade-out');
-            setTimeout(() => splash.style.display = 'none', 700);
-            audio.play().catch(e => console.log("Audio:", e));
+            setTimeout(() => {
+                splash.classList.add('hidden');
+            }, 700);
+            audio.play().catch(err => console.log("Audio blocked:", err));
         });
 
+        // Community Hub data
         const allyServers = [
             { name: "BLAH #ALBTHCKS", invite: "Ty7qb4thSs", guildId: "1504217597900755075", icon: "335c5d2498dbf8b0ab834b022710c86a", members: "99999", status: "999999 ONLINE" }
         ];
@@ -553,11 +563,4 @@
             card.innerHTML = `
                 <div class="server-info">
                     <img class="server-icon" src="${iconUrl}" alt="${server.name}">
-                    <div class="server-details">
-                        <h4>${server.name}</h4>
-                        <p>${server.members} • ${server.status}</p>
-                    </div>
-                </div>
-            `;
-            card.onclick = () => openModal(server);
-            container
+                    
