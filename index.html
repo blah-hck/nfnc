@@ -16,7 +16,8 @@
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
-            background: url("https://i.imgur.com/9t8sQrX.gif") center / cover no-repeat fixed;
+            /* Background: itim + logo mo */
+            background: #000 url("https://i.imgur.com/35m0Q7T.png") center top / contain no-repeat fixed;
             position: relative;
         }
 
@@ -24,7 +25,7 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.7);
             z-index: 0;
             pointer-events: none;
         }
@@ -37,13 +38,15 @@
             z-index: 1;
         }
 
+        /* ✅ Bagong Font Style gaya ng "PUBLIC ENEMY" */
         h1 {
-            font-size: clamp(2.2rem, 8vw, 3rem);
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            color: #fff;
+            font-size: clamp(2.3rem, 9vw, 3.2rem);
+            letter-spacing: 3px;
+            margin: 20px 0 40px;
+            color: #ffffff;
             text-transform: uppercase;
-            font-family: 'Impact', sans-serif;
+            font-family: 'Old English Text MT', 'Blackletter', 'Garamond', serif;
+            text-shadow: 0 0 12px rgba(255,255,255,0.25);
         }
 
         .section-title {
@@ -115,14 +118,20 @@
             align-items: center;
             color: #fff;
             font-size: clamp(1.8rem, 6vw, 2.5rem);
-            font-family: 'Impact', sans-serif;
+            font-family: serif;
             letter-spacing: 2px;
             cursor: pointer;
             gap: 20px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        #splash .main-text {
+            font-size: clamp(2rem, 7vw, 2.8rem);
+            color: #fff;
         }
 
         #splash .tap-text {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #888;
             font-family: 'Segoe UI', sans-serif;
         }
@@ -214,7 +223,7 @@
             border-radius: 12px;
             padding: 30px 20px;
             text-align: center;
-            font-family: 'Impact', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             letter-spacing: 2px;
             color: #fff;
         }
@@ -242,7 +251,6 @@
             color: #fff;
             text-decoration: none;
             font-size: 1rem;
-            font-family: 'Segoe UI', sans-serif;
             transition: all 0.2s ease;
         }
 
@@ -258,7 +266,6 @@
             color: #888;
             font-size: 0.9rem;
             cursor: pointer;
-            font-family: 'Segoe UI', sans-serif;
         }
 
         .close-modal:hover {
@@ -270,12 +277,13 @@
 
     <!-- Splash Screen -->
     <div id="splash">
-        THE WORLD IS YOUR.
-        <div class="tap-text">the the screen.</div>
+        <div class="main-text">THE WORLD IS YOUR..</div>
+        <div class="tap-text">𝖙𝖆𝖕 𝖙𝖍𝖊 𝖘𝖈𝖗𝖊𝖊𝖓.</div>
     </div>
 
     <div class="container">
-        <h1>𝐍𝐎 𝐂𝐀𝐒𝐄 𝐍𝐎 𝐅𝐀𝐂𝐄</h1>
+        <!-- ✅ Nakasulat na "NO FACE NO CASE" gamit ang style na gusto mo -->
+        <h1>NO FACE NO CASE</h1>
 
         <!-- PINUNO -->
         <div class="section-title">PINUNO</div>
@@ -343,7 +351,7 @@
             </div>
         </div>
 
-        <!-- TOP SHOTTA / ADMINS - DINAGDAGAN NG ISA -->
+        <!-- TOP SHOTTA -->
         <div class="section-title">TOP SHOTTA</div>
         <div class="grid">
             <div class="user-card">
@@ -360,7 +368,6 @@
                 </div>
                 <div class="username">Clems</div>
             </div>
-            <!-- ✅ DAGDAGAN MO DITO NG IKATLO KUNG MAY IDADAGDAG KA PA -->
             <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/bOEmElX.png" alt="Nio">
@@ -370,7 +377,7 @@
             </div>
         </div>
 
-        <!-- MEMBERS -->
+        <!-- Day Ones -->
         <div class="section-title">Day Ones</div>
         <div class="marquee-wrapper">
             <div class="marquee-content">
@@ -416,7 +423,7 @@
                     </div>
                     <div class="username">VinSwag</div>
                 </div>
-                <!-- Repeat para tuloy ang ikot -->
+                <!-- Repeat -->
                 <div class="user-card">
                     <div class="avatar-wrap">
                         <img class="avatar" src="https://i.imgur.com/FGirYUH.png" alt="JM">
@@ -467,7 +474,6 @@
         <div class="hub-container" id="hubContainer"></div>
     </div>
 
-    <!-- Modal -->
     <div id="serverModal">
         <div class="modal-content">
             <h3 id="modalName"></h3>
@@ -485,7 +491,6 @@
     
 
     <script>
-        // Ayusin sirang litrato
         document.querySelectorAll('img').forEach(img => {
             img.onerror = function() {
                 if(this.classList.contains('avatar') || this.classList.contains('server-icon')) {
@@ -494,7 +499,6 @@
             };
         });
 
-        // Splash + Sound
         const splash = document.getElementById('splash');
         const audio = document.getElementById('bgAudio');
         audio.volume = 0.25;
@@ -504,7 +508,6 @@
             audio.play().catch(err => console.log("Audio error:", err));
         });
 
-        // Community Hub Script
         (function() {
             'use strict';
             const allyServers = [
@@ -549,5 +552,5 @@
     </script>
 
 </body>
-    </html>
-                            
+                    </html>
+                        
