@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N̶O̶ ̶F̶A̶C̶E̶ ̶N̶O̶ ̶C̶A̶S̶E̶</title>
+    <title>Protected:Blah</title>
     <style>
         * {
             margin: 0;
@@ -13,21 +13,19 @@
         }
 
         body {
-            background: #000;
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
-            /* Background GIF na sinend mo */
-            background: url("https://i.imgur.com/MDTjE5l.png") center / cover no-repeat fixed;
+            /* Tamang background na sinend mo */
+            background: url("https://i.imgur.com/9t8sQrX.gif") center / cover no-repeat fixed;
             position: relative;
         }
 
-        /* Para medyo madilim nang kaunti ang background para mas malinaw ang mga avatar */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.65);
             z-index: 0;
             pointer-events: none;
         }
@@ -45,7 +43,7 @@
             letter-spacing: 3px;
             margin-bottom: 10px;
             color: #fff;
-            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            text-shadow: 0 0 20px rgba(255,255,255,0.25);
             font-family: 'Impact', sans-serif;
         }
 
@@ -101,25 +99,7 @@
             object-fit: cover;
             z-index: 2;
             position: relative;
-            /* Para hindi magkaroon ng parang box o outline kapag may error */
             background: #111;
-        }
-
-        .decor {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            pointer-events: none;
-            z-index: 3;
-            /* Itinatago kapag hindi ma-load */
-            display: none;
-        }
-
-        .decor.loaded {
-            display: block;
         }
 
         .status-dot {
@@ -144,7 +124,7 @@
             color: #aaa;
         }
 
-        /* Gumagalaw na Members Row */
+        /* Gumagalaw na Members */
         .marquee-wrapper {
             width: 100%;
             overflow: hidden;
@@ -175,19 +155,20 @@
             height: 55px;
         }
 
-        /* Audio control button */
+        /* Sound Button */
         .audio-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 999;
-            background: rgba(0,0,0,0.7);
-            border: 1px solid #333;
+            background: rgba(0,0,0,0.75);
+            border: 1px solid #444;
             color: #fff;
-            padding: 10px 15px;
+            padding: 10px 16px;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            box-shadow: 0 0 8px rgba(255,255,255,0.15);
         }
     </style>
 </head>
@@ -198,25 +179,23 @@
             <span>Views: 8253</span>
         </div>
 
-        <h1>NO FACE NO CASE</h1>
+        <h1>N̶O̶ ̶F̶A̶C̶E̶ ̶N̶O̶ ̶C̶A̶S̶E̶</h1>
 
         <!-- TOP ROW -->
         <div class="grid">
-            <div class="user-card" data-id="1">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/Wh5d6RR.gif" alt="Avatar">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="2">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/iDJB8Ol.png" alt="Avatar">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="3">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/Hxjp3su.gif" alt="Avatar">
                     <div class="status-dot status-offline"></div>
@@ -227,35 +206,31 @@
         <!-- ABOVE ALL -->
         <div class="section-title">ABOVE ALL</div>
         <div class="grid">
-            <div class="user-card" data-id="4">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/iOZH1e2.jpeg" alt="Avatar">
                     <div class="status-dot status-offline"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="5">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/cR3yxWV.jpeg" alt="Avatar">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="6">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/XkHga9z.jpeg" alt="Avatar">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="7">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/FkMZrTS.png" alt="Avatar">
                     <div class="status-dot status-idle"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="8">
+            <div class="user-card">
                 <div class="avatar-wrap">
                     <img class="avatar" src="https://i.imgur.com/8Socw02.jpeg" alt="Avatar">
                     <div class="status-dot status-dnd"></div>
@@ -266,26 +241,25 @@
         <!-- ADMINS -->
         <div class="section-title">ADMINS</div>
         <div class="grid">
-            <div class="user-card" data-id="9">
+            <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/AQiHBgA.gif" alt="Avatar">
+                    <img class="avatar" src="https://i.imgur.com/AQiHBgA.gif" alt="Admin">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
-
-            <div class="user-card" data-id="10">
+            <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/zY6UbYm.gif" alt="Avatar">
+                    <img class="avatar" src="https://i.imgur.com/zY6UbYm.gif" alt="Admin">
                     <div class="status-dot status-online"></div>
                 </div>
             </div>
         </div>
 
-        <!-- MEMBERS - GUMAGALAW -->
+        <!-- MEMBERS - KUMPLETO NA LAHAT -->
         <div class="section-title">MEMBERS</div>
         <div class="marquee-wrapper">
             <div class="marquee-content">
-                <!-- Unang set -->
+                <!-- Lahat ng members kasama si Ccer at PJ -->
                 <div class="user-card">
                     <div class="avatar-wrap">
                         <img class="avatar" src="https://i.imgur.com/FGirYUH.png" alt="JM">
@@ -309,27 +283,35 @@
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png" alt="Avatar">
+                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png" alt="Ccer">
                         <div class="status-dot status-offline"></div>
                     </div>
-                </div> 
+                    <div class="username">Ccer</div>
+                </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png" alt="Ackz">
+                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png" alt="PJ">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">PJ</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png" alt="Ackz">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">Ackz</div>
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png" alt="VinSwag">
+                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png" alt="VinSwag">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">VinSwag</div>
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png" alt="Thong">
+                        <img class="avatar" src="https://i.imgur.com/FkMZrTS.png" alt="Thong">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">Thong</div>
@@ -359,27 +341,35 @@
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png" alt="Avatar">
+                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png" alt="Ccer">
                         <div class="status-dot status-offline"></div>
                     </div>
-                </div> 
+                    <div class="username">Ccer</div>
+                </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png" alt="Ackz">
+                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png" alt="PJ">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">PJ</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png" alt="Ackz">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">Ackz</div>
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png" alt="VinSwag">
+                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png" alt="VinSwag">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">VinSwag</div>
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png" alt="Thong">
+                        <img class="avatar" src="https://i.imgur.com/FkMZrTS.png" alt="Thong">
                         <div class="status-dot status-offline"></div>
                     </div>
                     <div class="username">Thong</div>
@@ -392,67 +382,33 @@
     <audio id="bgAudio" loop preload="auto">
         <source src="https://mp3tourl.com/audio/1782204984234-82cf6eb7-b5f1-4520-bd77-926e2c43b1c8.mp3" type="audio/mpeg">
     
+
     <button class="audio-btn" id="audioToggle">🔊 Play Music</button>
 
     <script>
-        // Ayusin ang mga sirang picture/link
+        // Ayusin ang mga sirang larawan
         document.querySelectorAll('img').forEach(img => {
             img.onerror = function() {
-                this.style.display = 'none';
-                // Kung avatar, lagyan ng itim na background
                 if(this.classList.contains('avatar')) {
                     this.src = "https://cdn.discordapp.com/embed/avatars/0.png";
                 }
             };
         });
 
-        // Audio control
+        // Sound control
         const audio = document.getElementById('bgAudio');
         const audioBtn = document.getElementById('audioToggle');
-        audio.volume = 0.3;
+        audio.volume = 0.25;
 
         audioBtn.addEventListener('click', () => {
             if(audio.paused) {
-                audio.play().catch(e => console.log("Auto-play blocked, click to play"));
+                audio.play().catch(err => console.log("I-click para i-play ang tunog"));
                 audioBtn.textContent = "🔇 Stop Music";
             } else {
                 audio.pause();
                 audioBtn.textContent = "🔊 Play Music";
             }
         });
-
-        // Real-time Discord Status
-        const socket = new WebSocket('wss://api.lanyard.rest/socket');
-        const userIds = ["1497306715715010620", "1255196462195806290", "1421541305309335643", "1505646697290924103", "1475526026422649115", "851613391096381440", "1489962785839386755", "1414171167883001876"];
-
-        socket.onopen = () => {
-            socket.send(JSON.stringify({ op: 2, d: { subscribe_to_ids: userIds } }));
-        };
-
-        socket.onmessage = (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                if (data.op === 0 && data.d) {
-                    const id = data.d.discord_user.id;
-                    const status = data.d.discord_status;
-                    const avatar = data.d.discord_user.avatar;
-                    const avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`;
-
-                    const card = document.querySelector(`.user-card[data-id="${id}"]`);
-                    if (card) {
-                        const avatarImg = card.querySelector('.avatar');
-                        avatarImg.src = avatarUrl;
-                        const dot = card.querySelector('.status-dot');
-                        dot.className = `status-dot status-${status}`;
-                    }
-                }
-            } catch(e) {
-                console.log("Lanyard message error:", e);
-            }
-        };
-
-        socket.onerror = () => console.log("Lanyard connection error");
-        socket.onclose = () => setTimeout(() => window.location.reload(), 10000);
     </script>
 </body>
 </html>
