@@ -11,7 +11,7 @@
             color: #ffffff;
             min-height: 100vh;
             padding: 40px 20px;
-            background: #000000 url("https://i.imgur.com/63LFjRd.gif") center top / contain no-repeat fixed;
+            background: #000000 url("https://i.imgur.com/zmi8DTM.png") center top / contain no-repeat fixed;
             position: relative;
         }
 
@@ -276,7 +276,7 @@
         <h1>NO FACE NO CASE</h1>
 
         <!-- ✅ PINUNO -->
-        <div class="section-title"><---></div>
+        <div class="section-title">PINUNO</div>
         <div class="grid">
             <div class="user-card">
                 <div class="avatar-wrap">
@@ -408,12 +408,24 @@
         </div>
     </div>
 
+    <!-- ✅ SOUND - GAMIT ANG LINK MO, BUO AT TUMUTUNOG -->
+    <audio id="bgAudio" loop preload="auto" style="display:none;">
+        <source src="https://www.image2url.com/r2/default/audio/1782229903021-0137bda8-9730-463b-bafa-34dca19203ae.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+    
+
     <script>
-        // ✅ Splash screen function
+        // ✅ Splash screen function + Sound playback
         function hideSplash() {
             const splash = document.getElementById('splash');
+            const audio = document.getElementById('bgAudio');
             splash.classList.add('fade-out');
-            setTimeout(() => splash.classList.add('hidden'), 500);
+            setTimeout(() => {
+                splash.classList.add('hidden');
+            }, 500);
+            // Tutunog kapag pinindot, volume nakaset sa 25%
+            audio.volume = 0.25;
+            audio.play().catch(err => console.log("Audio error:", err));
         }
 
         // Ayusin ang sirang litrato
@@ -451,7 +463,6 @@
             container.appendChild(card);
         });
 
-        // ✅ TINAPOS KO NA ANG PUTOL NA SCRIPT MO!
         function openModal(server) {
             document.getElementById('modalName').textContent = server.name;
             document.getElementById('modalInfo').textContent = `${server.members} Members • ${server.status}`;
@@ -470,4 +481,4 @@
 
 </body>
     </html>
-                    
+    
