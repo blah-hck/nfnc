@@ -13,17 +13,16 @@
             padding: 40px 20px;
             background: #000000 url("https://i.imgur.com/0ihl3E4.jpeg") center top / contain no-repeat fixed;
             position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0,0,0,0.75);
             z-index: 0;
             pointer-events: none;
         }
-
         .container {
             max-width: 720px;
             margin: 0 auto;
@@ -31,7 +30,6 @@
             position: relative;
             z-index: 1;
         }
-
         h1 {
             font-size: clamp(2.5rem, 10vw, 3.5rem);
             letter-spacing: 4px;
@@ -39,26 +37,21 @@
             text-transform: uppercase;
             font-family: Arial Black, Impact, Helvetica Bold, sans-serif;
             font-weight: 900;
-            font-stretch: condensed;
             text-shadow: 0 0 12px rgba(255,255,255,0.2);
         }
-
         .section-title {
             font-size: 1rem;
             color: #cccccc;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 35px 0 20px;
-            font-family: Arial, sans-serif;
         }
-
         .grid {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 25px;
         }
-
         .user-card {
             display: flex;
             flex-direction: column;
@@ -67,22 +60,19 @@
             transition: transform 0.2s;
         }
         .user-card:hover { transform: scale(1.05); }
-
         .avatar-wrap {
             position: relative;
             width: 85px;
             height: 85px;
         }
-
         .avatar {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 2px solid #222222;
+            border: 2px solid #222;
             object-fit: cover;
-            background: #111111;
+            background: #111;
         }
-
         .status-dot {
             position: absolute;
             bottom: 3px;
@@ -90,69 +80,48 @@
             width: 14px;
             height: 14px;
             border-radius: 50%;
-            border: 2px solid #000000;
+            border: 2px solid #000;
             background: #80848e;
         }
-
         .status-online { background: #23a55a; }
         .status-idle { background: #f0b232; }
         .status-dnd { background: #f23f43; }
-
         .username {
             margin-top: 8px;
             font-size: 0.85rem;
-            color: #cccccc;
-            font-family: Arial, sans-serif;
-            word-break: break-all;
+            color: #ccc;
             max-width: 100px;
-        }
-        .activity {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 3px;
-            max-width: 100px;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
-
         #splash {
             position: fixed;
             inset: 0;
-            background: #000000;
+            background: #000;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #ffffff;
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            letter-spacing: 2px;
             cursor: pointer;
-            gap: 20px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.3);
-            opacity: 1;
             transition: opacity 0.5s ease;
-            pointer-events: auto !important;
         }
         #splash.fade-out { opacity: 0; pointer-events: none; }
         #splash.hidden { display: none; }
         #splash .main-text {
             font-size: clamp(2rem, 7vw, 2.8rem);
             font-family: Arial Black, Impact, sans-serif;
-            font-weight: 900;
             text-transform: uppercase;
         }
-        #splash .tap-text { font-size: 1.1rem; color: #aaaaaa; font-family: Arial, sans-serif; }
-
+        #splash .tap-text { font-size: 1.1rem; color: #aaa; margin-top: 10px; }
         .marquee-wrapper { width: 100%; overflow: hidden; margin-top: 20px; }
         .marquee-content { display: flex; gap: 25px; animation: scroll 30s linear infinite; width: max-content; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
         .hub-container {
             margin-top: 20px;
             padding: 15px;
-            background: rgba(18, 18, 18, 0.7);
+            background: rgba(18,18,18,0.7);
             border: 1px solid #2a2a2a;
             border-radius: 6px;
         }
@@ -162,12 +131,12 @@
             justify-content: space-between;
             padding: 12px;
             margin: 8px 0;
-            background: rgba(30, 30, 30, 0.6);
+            background: rgba(30,30,30,0.6);
             border-radius: 4px;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .server-card:hover { background: rgba(40, 40, 40, 0.8); }
+        .server-card:hover { background: rgba(40,40,40,0.8); }
         .server-info { display: flex; align-items: center; gap: 12px; }
         .server-icon {
             width: 48px;
@@ -178,11 +147,10 @@
         }
         .server-details h4 { font-size: 0.95rem; color: #fff; margin-bottom: 2px; }
         .server-details p { font-size: 0.8rem; color: #999; }
-
         #serverModal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             display: none;
             justify-content: center;
             align-items: center;
@@ -192,26 +160,23 @@
         .modal-content {
             width: 100%;
             max-width: 380px;
-            background: rgba(25, 25, 25, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(25,25,25,0.95);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
             padding: 30px 20px;
             text-align: center;
-            color: #fff;
         }
-        .modal-content h3 { font-size: 1.8rem; margin-bottom: 15px; font-family: Arial Black, Impact, sans-serif; }
+        .modal-content h3 { font-size: 1.8rem; margin-bottom: 15px; }
         .modal-content p { font-size: 1rem; color: #aaa; margin-bottom: 25px; }
         .modal-join {
             display: inline-block;
             padding: 10px 25px;
-            background: rgba(45, 125, 70, 0.3);
-            border: 1px solid rgba(45, 125, 70, 0.5);
+            background: rgba(45,125,70,0.3);
+            border: 1px solid rgba(45,125,70,0.5);
             border-radius: 6px;
             color: #fff;
             text-decoration: none;
-            transition: background 0.2s;
         }
-        .modal-join:hover { background: rgba(45, 125, 70, 0.5); }
         .close-modal {
             margin-top: 20px;
             background: transparent;
@@ -219,6 +184,93 @@
             color: #888;
             font-size: 0.9rem;
             cursor: pointer;
+        }
+
+        /* ✅ PROFILE POPUP — EKSAKTO SA SAMPLE MO */
+        #profileModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 10001;
+        }
+        .profile-card {
+            width: 100%;
+            max-width: 300px;
+            background: #111111;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: left;
+            border: 1px solid #222;
+            position: relative;
+        }
+        .close-profile {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #555;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .prof-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .prof-avatar-wrap { position: relative; }
+        .prof-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #f23f43;
+        }
+        .prof-status-big {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #111;
+            background: #80848e;
+        }
+        .prof-status-big.status-online { background: #23a55a; }
+        .prof-status-big.status-idle { background: #f0b232; }
+        .prof-status-big.status-dnd { background: #f23f43; }
+        .prof-name-big {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .prof-status-text {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        .prof-activity-box {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #252525;
+        }
+        .activity-title {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .activity-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .activity-details {
+            font-size: 0.85rem;
+            color: #aaa;
         }
     </style>
 </head>
@@ -230,38 +282,14 @@
     </div>
 
     <div class="container">
-        <h1><----></h1>
+        <h1>#4REEL</h1>
 
         <script>
         const members = {
-            topRow: [
-                {id: "1467935676694532408"},
-                {id: "1497306715715010620"},
-                {id: "901323764665573437"}
-            ],
-            aboveAll: [
-                {id: "1489962785839386755"},
-                {id: "1392396268558356534"},
-                {id: "1495784072029540526"},
-                {id: "1259504569193463848"},
-                {id: "1471133660144078910"}
-            ],
-            topShotta: [
-                {id: "1421541305309335643"},
-                {id: "1470435980170367037"},
-                {id: "1504842889145090329"}
-            ],
-            dayOnes: [
-                {id: "1513550327335616700"},
-                {id: "1520237144990285907"},
-                {id: "1507643775839899678"},
-                {id: "1522731101523542117"},
-                {id: "1458081038722138164"},
-                {id: "1284500317878354043"},
-                {id: "1364578189153796106"},
-                {id: "1509144884211351672"},
-                {id: "1456301481031372905"}
-            ]
+            topRow: [ {id: "1467935676694532408"}, {id: "1497306715715010620"}, {id: "901323764665573437"} ],
+            aboveAll: [ {id: "1489962785839386755"}, {id: "1392396268558356534"}, {id: "1495784072029540526"}, {id: "1259504569193463848"}, {id: "1471133660144078910"} ],
+            topShotta: [ {id: "1421541305309335643"}, {id: "1470435980170367037"}, {id: "1504842889145090329"} ],
+            dayOnes: [ {id: "1513550327335616700"}, {id: "1520237144990285907"}, {id: "1507643775839899678"}, {id: "1522731101523542117"}, {id: "1458081038722138164"}, {id: "1284500317878354043"}, {id: "1364578189153796106"}, {id: "1509144884211351672"}, {id: "1456301481031372905"} ]
         };
         </script>
 
@@ -275,9 +303,7 @@
         <div class="grid" id="topShottaGrid"></div>
 
         <div class="section-title">DAY ONES</div>
-        <div class="marquee-wrapper">
-            <div class="marquee-content" id="dayOnesMarquee"></div>
-        </div>
+        <div class="marquee-wrapper"><div class="marquee-content" id="dayOnesMarquee"></div></div>
 
         <div class="section-title">COMMUNITY HUB</div>
         <div class="hub-container" id="hubContainer"></div>
@@ -288,14 +314,33 @@
             <h3 id="modalName"></h3>
             <p id="modalInfo"></p>
             <a href="" id="modalLink" target="_blank" class="modal-join">JOIN SERVER</a>
-            <br>
-            <button class="close-modal" onclick="closeModal()">CLOSE</button>
+            <br><button class="close-modal" onclick="closeServerModal()">CLOSE</button>
+        </div>
+    </div>
+
+    <div id="profileModal">
+        <div class="profile-card">
+            <button class="close-profile" onclick="closeProfileModal()">&times;</button>
+            
+            <div class="prof-header">
+                <div class="prof-avatar-wrap">
+                    <img class="prof-avatar" id="profAvatar">
+                    <div class="prof-status-big" id="profStatusBig"></div>
+                </div>
+                <div>
+                    <h3 class="prof-name-big" id="profNameBig"></h3>
+                    <p class="prof-status-text" id="profStatusText"></p>
+                </div>
+            </div>
+
+            <div class="prof-activity-box" id="activityBox">
+                <p class="activity-title">NO ACTIVITY</p>
+            </div>
         </div>
     </div>
 
     <audio id="bgAudio" loop preload="auto" style="display:none;">
         <source src="https://www.image2url.com/r2/default/audio/1782390881799-61def1ab-afbd-453d-ae39-f6aff7d67d0b.mp3">
-        Your browser does not support audio playback.
     
 
     <script>
@@ -305,127 +350,136 @@
             splash.classList.add('fade-out');
             setTimeout(() => splash.classList.add('hidden'), 500);
             audio.volume = 0.25;
-            audio.play().catch(err => console.log("Audio error:", err));
+            audio.play().catch(e => console.log(e));
         }
 
-        async function makeUserCard(userId) {
+        function formatTime(start) {
+            const now = Date.now();
+            const diff = Math.floor((now - start) / 1000);
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            if(h > 0) return `${h} hour${h>1?'s':''} ${m} min`;
+            return `${m} minutes`;
+        }
+
+        function openProfile(data, avatar) {
+            const u = data.discord_user;
+            const status = data.discord_status;
+            const statusText = {
+                online: "Online", idle: "Idle", dnd: "Do Not Disturb", offline: "Offline"
+            };
+
+            // Avatar at Status
+            document.getElementById('profAvatar').src = avatar;
+            const statusEl = document.getElementById('profStatusBig');
+            statusEl.className = "prof-status-big";
+            if(status === 'online') statusEl.classList.add('status-online');
+            if(status === 'idle') statusEl.classList.add('status-idle');
+            if(status === 'dnd') statusEl.classList.add('status-dnd');
+            document.getElementById('profStatusText').textContent = statusText[status];
+            document.getElementById('profNameBig').textContent = u.global_name || u.username;
+
+            // Activity (Roblox / FiveM / Spotify)
+            const actBox = document.getElementById('activityBox');
+            let html = `<p class="activity-title">NO ACTIVITY</p>`;
+
+            if(data.activities?.length > 0) {
+                const act = data.activities[0];
+                let icon = "🎮";
+                let name = act.name;
+                let details = "";
+
+                if(act.type === 2) {
+                    icon = "🎵";
+                    name = "Spotify";
+                    details = `Listening to ${act.state || "Song"}`;
+                } else {
+                    if(name.toLowerCase().includes("roblox")) name = "ROBLOX";
+                    else if(name.toLowerCase().includes("fivem") || name.toLowerCase().includes("gta")) name = "FiveM / GTA V";
+                    details = act.details || `Playing for ${formatTime(act.timestamps.start || Date.now())}`;
+                }
+
+                html = `
+                    <p class="activity-title">CURRENTLY PLAYING</p>
+                    <p class="activity-name">${icon} ${name}</p>
+                    <p class="activity-details">${details}</p>
+                `;
+            }
+            actBox.innerHTML = html;
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+
+        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+        function closeServerModal() { document.getElementById('serverModal').style.display = 'none'; }
+        window.onclick = e => {
+            if(e.target === document.getElementById('profileModal')) closeProfileModal();
+            if(e.target === document.getElementById('serverModal')) closeServerModal();
+        }
+
+        async function makeCard(userId) {
             const card = document.createElement("div");
             card.className = "user-card";
-
             try {
                 const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
                 const data = await res.json();
-                if (!data.success) throw Error("No data");
                 const d = data.data;
-
-                const avatarUrl = d.discord_user.avatar 
+                const avatar = d.discord_user.avatar 
                     ? `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=128`
                     : "https://cdn.discordapp.com/embed/avatars/0.png";
-                const profileLink = `https://discord.com/users/${userId}`;
-                const status = d.discord_status;
 
-                let activityText = "Offline";
-                if (d.activities?.length > 0) {
-                    const act = d.activities[0];
-                    const type = act.type === 0 ? "Playing" : act.type === 2 ? "Listening" : act.type === 3 ? "Watching" : "";
-                    activityText = `${type} ${act.name}`;
-                }
-
-                card.innerHTML = `
-                    <a href="${profileLink}" target="_blank" style="text-decoration:none">
-                        <div class="avatar-wrap">
-                            <img class="avatar" src="${avatarUrl}" alt="Profile">
-                            <div class="status-dot status-${status}"></div>
-                        </div>
-                        <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
-                        <div class="activity">${activityText}</div>
-                    </a>
-                `;
-            } catch {
                 card.innerHTML = `
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Unavailable">
-                        <div class="status-dot"></div>
+                        <img class="avatar" src="${avatar}">
+                        <div class="status-dot status-${d.discord_status}"></div>
                     </div>
+                    <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
+                `;
+                card.onclick = () => openProfile(d, avatar);
+            } catch {
+                card.innerHTML = `
+                    <div class="avatar-wrap"><img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png"><div class="status-dot"></div></div>
                     <div class="username">Unavailable</div>
                 `;
             }
             return card;
         }
 
-        async function renderGrid(gridId, list) {
-            const grid = document.getElementById(gridId);
-            grid.innerHTML = "";
-            for (const u of list) {
-                if (u.id) grid.appendChild(await makeUserCard(u.id));
-            }
+        async function renderGrid(id, list) {
+            const grid = document.getElementById(id);
+            for(const u of list) grid.appendChild(await makeCard(u.id));
         }
-
         async function renderMarquee(list) {
             const box = document.getElementById("dayOnesMarquee");
-            box.innerHTML = "";
-            for (let i = 0; i < 2; i++) {
-                for (const u of list) {
-                    if (u.id) box.appendChild(await makeUserCard(u.id));
-                }
-            }
+            for(let i=0; i<2; i++) for(const u of list) box.appendChild(await makeCard(u.id));
         }
-
         async function loadAll() {
             renderGrid("topRowGrid", members.topRow);
             renderGrid("aboveAllGrid", members.aboveAll);
             renderGrid("topShottaGrid", members.topShotta);
             renderMarquee(members.dayOnes);
         }
-
         loadAll();
-        setInterval(loadAll, 60000);
 
-        // BOBO KA TOL!
         const allyServers = [
-            { 
-                name: "BLAH #ALBTHAX", 
-                invite: "Ty7qb4thSs", 
-                guildId: "1504217597900755075", 
-                icon: "335c5d2498dbf8b0ab834b022710c86a",
-                description: "Hax Enjoyer"
-            },
-            { 
-                name: "KNA SAYIN #4REEL", 
-                invite: "BWptZKj8mN", 
-                guildId: "1525845358436028506", 
-                icon: "e887897782e8b475e023ee5b64f53703",
-                description: "#4REEL"
-            }
+            { name: "BLAH #ALBTHAX", invite: "Ty7qb4thSs", guildId: "1504217597900755075", icon: "335c5d2498dbf8b0ab834b022710c86a", description: "Hax Enjoyer" },
+            { name: "KNA SAYIN #4REEL", invite: "BWptZKj8mN", guildId: "1525845358436028506", icon: "e887897782e8b475e023ee5b64f53703", description: "#4REEL" }
         ];
-
         const container = document.getElementById('hubContainer');
         allyServers.forEach(server => {
             const iconUrl = `https://cdn.discordapp.com/icons/${server.guildId}/${server.icon}.png?size=128`;
             const card = document.createElement('div');
             card.className = 'server-card';
             card.innerHTML = `
-                <div class="server-info">
-                    <img class="server-icon" src="${iconUrl}" alt="${server.name}">
-                    <div class="server-details">
-                        <h4>${server.name}</h4>
-                        <p>${server.description}</p>
-                    </div>
-                </div>
+                <div class="server-info"><img class="server-icon" src="${iconUrl}"><div class="server-details"><h4>${server.name}</h4><p>${server.description}</p></div></div>
             `;
-            card.onclick = () => openModal(server);
+            card.onclick = () => {
+                document.getElementById('modalName').textContent = server.name;
+                document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
+                document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
+                document.getElementById('serverModal').style.display = 'flex';
+            };
             container.appendChild(card);
         });
-
-        function openModal(server) {
-            document.getElementById('modalName').textContent = server.name;
-            document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
-            document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
-            document.getElementById('serverModal').style.display = 'flex';
-        }
-        function closeModal() { document.getElementById('serverModal').style.display = 'none'; }
-        window.onclick = e => { if (e.target === document.getElementById('serverModal')) closeModal(); }
     </script>
-
 </body>
 </html>
