@@ -186,7 +186,7 @@
             cursor: pointer;
         }
 
-        /* #4REEL */
+        /* PROFILE POPUP */
         #profileModal {
             position: fixed;
             inset: 0;
@@ -291,8 +291,11 @@
         <h1> </h1>
 
         <script>
+        const MY_PROFILE_ID = "1497306715715010620"; // PURESKILLS
+        const MY_WEBSITE = "https://blah-hck.github.io/blah/"; // BOBO
+
         const members = {
-            topRow: [ {id: "1467935676694532408"}, {id: "1497306715715010620"}, {id: "901323764665573437"} ],
+            topRow: [ {id: "1467935676694532408"}, {id: MY_PROFILE_ID}, {id: "901323764665573437"} ],
             aboveAll: [ {id: "1489962785839386755"}, {id: "1392396268558356534"}, {id: "1495784072029540526"}, {id: "1259504569193463848"}, {id: "1471133660144078910"} ],
             topShotta: [ {id: "1421541305309335643"}, {id: "1470435980170367037"}, {id: "1504842889145090329"} ],
             dayOnes: [ {id: "1513550327335616700"}, {id: "1520237144990285907"}, {id: "1507643775839899678"}, {id: "1522731101523542117"}, {id: "1458081038722138164"}, {id: "1284500317878354043"}, {id: "1364578189153796106"}, {id: "1509144884211351672"}, {id: "1456301481031372905"} ]
@@ -378,7 +381,6 @@
                 online: "Online", idle: "Idle", dnd: "Do Not Disturb", offline: "Offline"
             };
 
-            // #4REEL
             document.getElementById('profAvatar').src = avatar;
             const statusEl = document.getElementById('profStatusBig');
             statusEl.className = "prof-status-big";
@@ -388,24 +390,20 @@
             document.getElementById('profStatusText').textContent = statusText[status];
             document.getElementById('profNameBig').textContent = u.global_name || u.username;
 
-            // #4REEL
             const actBox = document.getElementById('activityBox');
             let finalHtml = `<p class="activity-title">CURRENT STATUS</p><p class="activity-details">Watching Pornhub.com</p>`;
 
             if(data.activities && data.activities.length > 0) {
-                // #4REEL
                 const spotifyAct = data.activities.find(a => a.type === 2 || a.name === "Spotify");
                 const gameAct = data.activities.find(a => a.type === 0);
 
                 if(spotifyAct) {
-                    // #4REEL
                     finalHtml = `
                         <p class="activity-title">🎵 LISTENING TO SPOTIFY</p>
                         <p class="activity-name">${spotifyAct.details || "Unknown Track"}</p>
                         <p class="activity-details">by ${spotifyAct.state || "Unknown Artist"}</p>
                     `;
                 } else if(gameAct) {
-                    // #4REEL
                     let gameName = gameAct.name;
                     if(gameName.toLowerCase().includes("roblox")) gameName = "ROBLOX";
                     else if(gameName.toLowerCase().includes("fivem") || gameName.toLowerCase().includes("gta")) gameName = "FiveM / GTA V";
@@ -418,7 +416,6 @@
                         ${timeText ? `<p class="activity-details">${timeText}</p>` : ""}
                     `;
                 } else {
-                    // BOBO
                     const act = data.activities[0];
                     finalHtml = `
                         <p class="activity-title">ACTIVITY</p>
@@ -455,7 +452,14 @@
                     </div>
                     <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
                 `;
-                card.onclick = () => openProfile(d, avatar);
+
+                // #4REEL
+                if(userId === MY_PROFILE_ID) {
+                    card.onclick = () => window.open(MY_WEBSITE, "_blank");
+                } else {
+                    // #4REEL
+                    card.onclick = () => openProfile(d, avatar);
+                }
             } catch {
                 card.innerHTML = `
                     <div class="avatar-wrap"><img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png"><div class="status-dot"></div></div>
