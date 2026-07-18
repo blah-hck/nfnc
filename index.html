@@ -186,7 +186,7 @@
             cursor: pointer;
         }
 
-        /* #4REEL */
+        /* ✅ PROFILE POPUP — EKSAKTO SA SAMPLE MO + FULL SPOTIFY SUPPORT */
         #profileModal {
             position: fixed;
             inset: 0;
@@ -200,77 +200,83 @@
         .profile-card {
             width: 100%;
             max-width: 300px;
-            background: #111111;
-            border-radius: 10px;
+            background: #18181b;
+            border-radius: 12px;
             padding: 25px 20px;
             text-align: left;
-            border: 1px solid #222;
+            border: 1px solid #27272a;
             position: relative;
         }
         .close-profile {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             background: transparent;
             border: none;
-            color: #555;
-            font-size: 1.3rem;
+            color: #71717a;
+            font-size: 1.4rem;
             cursor: pointer;
         }
         .prof-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 22px;
         }
         .prof-avatar-wrap { position: relative; }
         .prof-avatar {
-            width: 70px;
-            height: 70px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            border: 3px solid #f23f43;
+            border: 3px solid #dc2626;
         }
         .prof-status-big {
             position: absolute;
             bottom: 2px;
             right: 2px;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            border: 2px solid #111;
-            background: #80848e;
+            border: 3px solid #18181b;
+            background: #71717a;
         }
-        .prof-status-big.status-online { background: #23a55a; }
-        .prof-status-big.status-idle { background: #f0b232; }
-        .prof-status-big.status-dnd { background: #f23f43; }
+        .prof-status-big.status-online { background: #22c55e; }
+        .prof-status-big.status-idle { background: #f59e0b; }
+        .prof-status-big.status-dnd { background: #ef4444; }
         .prof-name-big {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fafafa;
             margin-bottom: 2px;
         }
         .prof-status-text {
-            font-size: 0.9rem;
-            color: #aaa;
+            font-size: 0.95rem;
+            color: #a1a1aa;
         }
         .prof-activity-box {
-            background: #1a1a1a;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #252525;
+            background: #27272a;
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid #3f3f46;
         }
         .activity-title {
-            font-size: 0.8rem;
-            color: #888;
-            margin-bottom: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #71717a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
         .activity-name {
             font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 3px;
+            font-weight: 700;
+            color: #fafafa;
+            margin-bottom: 4px;
         }
         .activity-details {
-            font-size: 0.85rem;
-            color: #aaa;
+            font-size: 0.9rem;
+            color: #d4d4d8;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -334,7 +340,8 @@
             </div>
 
             <div class="prof-activity-box" id="activityBox">
-                <p class="activity-title">TULOG</p>
+                <p class="activity-title">STATUS</p>
+                <p class="activity-details">Tulog</p>
             </div>
         </div>
     </div>
@@ -354,12 +361,14 @@
         }
 
         function formatTime(start) {
+            if(!start) return "";
             const now = Date.now();
             const diff = Math.floor((now - start) / 1000);
+            if(diff < 60) return "Just started";
             const h = Math.floor(diff / 3600);
             const m = Math.floor((diff % 3600) / 60);
-            if(h > 0) return `${h} hour${h>1?'s':''} ${m} min`;
-            return `${m} minutes`;
+            if(h > 0) return `${h}h ${m}m elapsed`;
+            return `${m}m elapsed`;
         }
 
         function openProfile(data, avatar) {
@@ -369,7 +378,7 @@
                 online: "Online", idle: "Idle", dnd: "Do Not Disturb", offline: "Offline"
             };
 
-            // Avatar at Status
+            // #4REEL
             document.getElementById('profAvatar').src = avatar;
             const statusEl = document.getElementById('profStatusBig');
             statusEl.className = "prof-status-big";
@@ -379,33 +388,45 @@
             document.getElementById('profStatusText').textContent = statusText[status];
             document.getElementById('profNameBig').textContent = u.global_name || u.username;
 
-            // Activity (Roblox / FiveM / Spotify)
+            // #4REEL
             const actBox = document.getElementById('activityBox');
-            let html = `<p class="activity-title">NO ACTIVITY</p>`;
+            let finalHtml = `<p class="activity-title">CURRENT STATUS</p><p class="activity-details">No activity found</p>`;
 
-            if(data.activities?.length > 0) {
-                const act = data.activities[0];
-                let icon = "🎮";
-                let name = act.name;
-                let details = "";
+            if(data.activities && data.activities.length > 0) {
+                // #4REEL
+                const spotifyAct = data.activities.find(a => a.type === 2 || a.name === "Spotify");
+                const gameAct = data.activities.find(a => a.type === 0);
 
-                if(act.type === 2) {
-                    icon = "🎵";
-                    name = "Spotify";
-                    details = `Listening to ${act.state || "Song"}`;
+                if(spotifyAct) {
+                    // #4REEL
+                    finalHtml = `
+                        <p class="activity-title">🎵 LISTENING TO SPOTIFY</p>
+                        <p class="activity-name">${spotifyAct.details || "Unknown Track"}</p>
+                        <p class="activity-details">by ${spotifyAct.state || "Unknown Artist"}</p>
+                    `;
+                } else if(gameAct) {
+                    // #4REEL
+                    let gameName = gameAct.name;
+                    if(gameName.toLowerCase().includes("roblox")) gameName = "ROBLOX";
+                    else if(gameName.toLowerCase().includes("fivem") || gameName.toLowerCase().includes("gta")) gameName = "FiveM / GTA V";
+
+                    const timeText = formatTime(gameAct.timestamps?.start);
+                    finalHtml = `
+                        <p class="activity-title">🎮 PLAYING</p>
+                        <p class="activity-name">${gameName}</p>
+                        ${gameAct.details ? `<p class="activity-details">${gameAct.details}</p>` : ""}
+                        ${timeText ? `<p class="activity-details">${timeText}</p>` : ""}
+                    `;
                 } else {
-                    if(name.toLowerCase().includes("roblox")) name = "ROBLOX";
-                    else if(name.toLowerCase().includes("fivem") || name.toLowerCase().includes("gta")) name = "FiveM / GTA V";
-                    details = act.details || `Playing for ${formatTime(act.timestamps.start || Date.now())}`;
+                    // BOBO
+                    const act = data.activities[0];
+                    finalHtml = `
+                        <p class="activity-title">ACTIVITY</p>
+                        <p class="activity-name">${act.name}</p>
+                    `;
                 }
-
-                html = `
-                    <p class="activity-title">CURRENTLY PLAYING</p>
-                    <p class="activity-name">${icon} ${name}</p>
-                    <p class="activity-details">${details}</p>
-                `;
             }
-            actBox.innerHTML = html;
+            actBox.innerHTML = finalHtml;
             document.getElementById('profileModal').style.display = 'flex';
         }
 
