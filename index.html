@@ -165,7 +165,9 @@
             background: rgba(30, 30, 30, 0.6);
             border-radius: 4px;
             cursor: pointer;
+            transition: background 0.2s;
         }
+        .server-card:hover { background: rgba(40, 40, 40, 0.8); }
         .server-info { display: flex; align-items: center; gap: 12px; }
         .server-icon {
             width: 48px;
@@ -207,7 +209,9 @@
             border-radius: 6px;
             color: #fff;
             text-decoration: none;
+            transition: background 0.2s;
         }
+        .modal-join:hover { background: rgba(45, 125, 70, 0.5); }
         .close-modal {
             margin-top: 20px;
             background: transparent;
@@ -228,7 +232,6 @@
     <div class="container">
         <h1><----></h1>
 
-        <!-- BOBO -->
         <script>
         const members = {
             topRow: [
@@ -378,12 +381,23 @@
         loadAll();
         setInterval(loadAll, 60000);
 
-        const allyServers = [{ 
-            name: "BLAH #ALBTHCKS", 
-            invite: "Ty7qb4thSs", 
-            guildId: "1504217597900755075", 
-            icon: "335c5d2498dbf8b0ab834b022710c86a"
-        }];
+        // BOBO KA TOL!
+        const allyServers = [
+            { 
+                name: "BLAH #ALBTHAX", 
+                invite: "Ty7qb4thSs", 
+                guildId: "1504217597900755075", 
+                icon: "335c5d2498dbf8b0ab834b022710c86a",
+                description: "Hax Enjoyer"
+            },
+            { 
+                name: "KNA SAYIN #4REEL", 
+                invite: "BWptZKj8mN", 
+                guildId: "1525845358436028506", 
+                icon: "e887897782e8b475e023ee5b64f53703",
+                description: "#4REEL"
+            }
+        ];
 
         const container = document.getElementById('hubContainer');
         allyServers.forEach(server => {
@@ -395,7 +409,7 @@
                     <img class="server-icon" src="${iconUrl}" alt="${server.name}">
                     <div class="server-details">
                         <h4>${server.name}</h4>
-                        <p>Official Server</p>
+                        <p>${server.description}</p>
                     </div>
                 </div>
             `;
@@ -405,7 +419,7 @@
 
         function openModal(server) {
             document.getElementById('modalName').textContent = server.name;
-            document.getElementById('modalInfo').textContent = "Join our official community server";
+            document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
             document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
             document.getElementById('serverModal').style.display = 'flex';
         }
