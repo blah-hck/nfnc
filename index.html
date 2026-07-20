@@ -72,6 +72,20 @@
             border: 2px solid #222;
             object-fit: cover;
             background: #111;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-decoration {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 115px;
+            height: 115px;
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.5));
         }
         .status-dot {
             position: absolute;
@@ -82,6 +96,7 @@
             border-radius: 50%;
             border: 2px solid #000;
             background: #80848e;
+            z-index: 3;
         }
         .status-online { background: #23a55a; }
         .status-idle { background: #f0b232; }
@@ -186,7 +201,7 @@
             cursor: pointer;
         }
 
-        /* PROFILE POPUP */
+        
         #profileModal {
             position: fixed;
             inset: 0;
@@ -291,18 +306,27 @@
         <h1> </h1>
 
         <script>
-        const MY_PROFILE_ID = "1497306715715010620"; // PURESKILLS
-        const MY_WEBSITE = "https://blah-hck.github.io/blah/"; // BOBO
+        /
+        const MY_PROFILE_ID = "1497306715715010620";
+        const MY_WEBSITE = "https://blah-hck.github.io/blah/";
+
+        // 
+        const DECORATIONS = {
+            "1497306715715010620": "1144059132517826601", /
+            "1467935676694532408": "", 
+            "901323764665573437": "", 
+        };
+         
 
         const members = {
             topRow: [ {id: "1467935676694532408"}, {id: MY_PROFILE_ID}, {id: "901323764665573437"} ],
             aboveAll: [ {id: "1489962785839386755"}, {id: "1392396268558356534"}, {id: "1495784072029540526"}, {id: "1259504569193463848"}, {id: "1471133660144078910"} ],
             topShotta: [ {id: "1421541305309335643"}, {id: "1470435980170367037"}, {id: "1504842889145090329"} ],
-            dayOnes: [ {id: "1513550327335616700"}, {id: "1520237144990285907"}, {id: "1507643775839899678"}, {id: "1517855862004383916"}, {id: "1458081038722138164"}, {id: "1284500317878354043"}, {id: "1364578189153796106"}, {id: "1509144884211351672"}, {id: "1456301481031372905"} ]
+            dayOnes: [ {id: "1513550327335616700"}, {id: "1520237144990285907"}, {id: "1507643775839899678"}, {id: "1517855862004383916"}, {id: "1458081038722138164"}, {id: "1284500317878354043"}, {id: "1364578189153796106"}, {id: "1368224386192248903"}, {id: "1456301481031372905"} ]
         };
         </script>
 
-        <div class="section-title">Top Row</div>
+        <div class="section-title">TOP ROW</div>
         <div class="grid" id="topRowGrid"></div>
 
         <div class="section-title">ABOVE ALL</div>
@@ -349,18 +373,11 @@
         </div>
     </div>
 
-    <audio id="bgAudio" loop preload="auto" style="display:none;">
-        <source src="https://www.image2url.com/r2/default/audio/1782390881799-61def1ab-afbd-453d-ae39-f6aff7d67d0b.mp3">
-    
-
     <script>
         function hideSplash() {
             const splash = document.getElementById('splash');
-            const audio = document.getElementById('bgAudio');
             splash.classList.add('fade-out');
             setTimeout(() => splash.classList.add('hidden'), 500);
-            audio.volume = 0.25;
-            audio.play().catch(e => console.log(e));
         }
 
         function formatTime(start) {
@@ -391,7 +408,7 @@
             document.getElementById('profNameBig').textContent = u.global_name || u.username;
 
             const actBox = document.getElementById('activityBox');
-            let finalHtml = `<p class="activity-title">CURRENT STATUS</p><p class="activity-details">Watching Pornhub.com</p>`;
+            let finalHtml = `<p class="activity-title">CURRENT STATUS</p><p class="activity-details">Watching...</p>`;
 
             if(data.activities && data.activities.length > 0) {
                 const spotifyAct = data.activities.find(a => a.type === 2 || a.name === "Spotify");
@@ -445,19 +462,22 @@
                     ? `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=128`
                     : "https://cdn.discordapp.com/embed/avatars/0.png";
 
+                
+                const decId = DECORATIONS[userId] || "";
+                const decHtml = decId ? `<img class="profile-decoration" src="https://cdn.discordapp.com/profile-decorations/${decId}.gif?size=128" alt="Decoration">` : "";
+
                 card.innerHTML = `
                     <div class="avatar-wrap">
+                        ${decHtml}
                         <img class="avatar" src="${avatar}">
                         <div class="status-dot status-${d.discord_status}"></div>
                     </div>
                     <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
                 `;
 
-                // #4REEL
                 if(userId === MY_PROFILE_ID) {
                     card.onclick = () => window.open(MY_WEBSITE, "_blank");
                 } else {
-                    // #4REEL
                     card.onclick = () => openProfile(d, avatar);
                 }
             } catch {
@@ -499,12 +519,4 @@
             `;
             card.onclick = () => {
                 document.getElementById('modalName').textContent = server.name;
-                document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
-                document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
-                document.getElementById('serverModal').style.display = 'flex';
-            };
-            container.appendChild(card);
-        });
-    </script>
-</body>
-</html>
+                d
