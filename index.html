@@ -29,6 +29,7 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            display: none; /* Itago muna hanggang ma-click ang splash */
         }
         h1 {
             font-size: clamp(2.5rem, 10vw, 3.5rem);
@@ -392,12 +393,14 @@
     </style>
 </head>
 <body>
+    
     <div id="splash" onclick="openMain()">
         <div class="main-text">THE WORLD IS YOURS</div>
         <div class="tap-text">TAP THE SCREEN</div>
     </div>
 
-    <div class="container">
+    <!-- MAIN CONTENT -->
+    <div class="container" id="mainContent">
         <h1> </h1>
         <script>
         const MY_PROFILE_ID = "1497306715715010620";
@@ -435,6 +438,8 @@
             <a href="https://discord.com/oauth2/authorize?client_id=1529525841153753148&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" class="bot-invite-btn">✧ INVITE BOT</a>
         </div>
     </div>
+
+    <!-- MODALS -->
     <div id="serverModal">
         <div class="modal-content">
             <h3 id="modalName"></h3>
@@ -466,24 +471,32 @@
             </div>
         </div>
     </div>
+
+    <!-- AUDIO -->
     <audio id="bgAudio" loop preload="auto" style="display:none;">
         <source src="https://www.image2url.com/r2/default/audio/1782390881799-61def1ab-afbd-453d-ae39-f6aff7d67d0b.mp3">
     
+
     <script>
+        // ✅ PINAKA-SIMPLE AT SIGURADONG PAGBUKAS
         function openMain() {
-            const splash = document.getElementById('splash');
+            // Itago ang splash
+            document.getElementById('splash').classList.add('fade-out');
+            // Ipakita ang main content
+            document.getElementById('mainContent').style.display = 'block';
+            // Mag-play ng audio
             const audio = document.getElementById('bgAudio');
-            splash.classList.add('fade-out');
             audio.volume = 0.25;
             audio.play().catch(() => {});
+            // I-load ang mga user card (hindi haharang sa click)
+            loadAll();
         }
 
-        
+        // ✅ LIGTAS NA PAGKUHA NG PROFILE
         function openProfile(data, avatarFallback) {
             const user = data?.discord_user;
             const status = data?.discord_status || 'offline';
 
-            
             if (!user) {
                 document.getElementById('profNameBig').innerText = 'Unknown User';
                 document.getElementById('profUsername').innerText = '@unknown';
@@ -495,7 +508,6 @@
                 return;
             }
 
-            
             document.getElementById('profNameBig').innerText = user.global_name || user.username || 'Unknown User';
             document.getElementById('profUsername').innerText = '@' + (user.username || 'unknown');
             document.getElementById('profBio').innerText = user.bio || 'Walang nakalagay na bio.';
@@ -503,14 +515,12 @@
                 ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256` 
                 : avatarFallback || 'https://cdn.discordapp.com/embed/avatars/0.png';
             
-            
             const statusEl = document.getElementById('profStatusBig');
             statusEl.className = 'prof-status-big';
             if (status === 'online') statusEl.classList.add('status-online');
             else if (status === 'idle') statusEl.classList.add('status-idle');
             else if (status === 'dnd') statusEl.classList.add('status-dnd');
 
-            
             let html = '';
             if (data.activities && data.activities.length > 0) {
                 data.activities.forEach(act => {
@@ -534,13 +544,4 @@
         function closeServerModal() { document.getElementById('serverModal').style.display = 'none'; }
         window.onclick = e => {
             if(e.target === document.getElementById('profileModal')) closeProfileModal();
-            if(e.target === document.getElementById('serverModal')) closeServerModal();
-        }
-
-        /
-        async function makeCard(userId) {
-            const card = document.createElement("div");
-            card.className = "user-card";
-
-            
-            let avatarUrl = 'https://cd
+            if(e.target === document.getElementById('serverModal
