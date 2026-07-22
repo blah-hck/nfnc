@@ -10,8 +10,10 @@
         body {
             color: #ffffff;
             min-height: 100vh;
-            background: #000 url("https://i.imgur.com/0ihl3E4.jpeg") center top / contain no-repeat fixed;
-            font-family: 'Segoe UI', sans-serif;
+            padding: 40px 20px;
+            background: #000000 url("https://i.imgur.com/0ihl3E4.jpeg") center top / contain no-repeat fixed;
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body::before {
             content: "";
@@ -19,57 +21,27 @@
             inset: 0;
             background: rgba(0,0,0,0.75);
             z-index: 0;
-        }
-
-        /* ✅ SPLASH SCREEN */
-        #splash {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        #splash.fade {
-            opacity: 0;
-            transition: opacity 0.25s ease;
             pointer-events: none;
         }
-        #splash .main {
-            font-size: clamp(2rem, 7vw, 3rem);
-            font-family: Arial Black, sans-serif;
-            text-transform: uppercase;
-            color: #fff;
-        }
-        #splash .sub {
-            font-size: 1rem;
-            color: #aaa;
-            margin-top: 12px;
-        }
-
-        /*  MAIN CONTENT */
-        #main {
-            position: relative;
-            z-index: 1;
-            padding: 40px 20px;
+        .container {
             max-width: 720px;
             margin: 0 auto;
-            display: none;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
-
         h1 {
             font-size: clamp(2.5rem, 10vw, 3.5rem);
             letter-spacing: 4px;
-            margin-bottom: 50px;
+            margin: 20px 0 50px;
             text-transform: uppercase;
-            font-family: Arial Black, Impact, sans-serif;
+            font-family: Arial Black, Impact, Helvetica Bold, sans-serif;
+            font-weight: 900;
+            text-shadow: 0 0 12px rgba(255,255,255,0.2);
         }
         .section-title {
             font-size: 1rem;
-            color: #ccc;
+            color: #cccccc;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 35px 0 20px;
@@ -85,7 +57,9 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
+            transition: transform 0.2s;
         }
+        .user-card:hover { transform: scale(1.05); }
         .avatar-wrap {
             position: relative;
             width: 85px;
@@ -96,9 +70,10 @@
             height: 100%;
             border-radius: 50%;
             border: 2px solid #222;
+            object-fit: cover;
             background: #111;
         }
-        .status {
+        .status-dot {
             position: absolute;
             bottom: 3px;
             right: 3px;
@@ -106,11 +81,11 @@
             height: 14px;
             border-radius: 50%;
             border: 2px solid #000;
-            background: #777;
+            background: #80848e;
         }
-        .status.on { background: #23a55a; }
-        .status.idle { background: #f0b232; }
-        .status.dnd { background: #f23f43; }
+        .status-online { background: #23a55a; }
+        .status-idle { background: #f0b232; }
+        .status-dnd { background: #f23f43; }
         .username {
             margin-top: 8px;
             font-size: 0.85rem;
@@ -120,17 +95,37 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .marquee-wrapper { overflow: hidden; margin-top: 20px; }
-        .marquee { display: flex; gap: 25px; animation: scroll 30s linear infinite; width: max-content; }
+        #splash {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+        #splash.fade-out { opacity: 0; pointer-events: none; }
+        #splash.hidden { display: none; }
+        #splash .main-text {
+            font-size: clamp(2rem, 7vw, 2.8rem);
+            font-family: Arial Black, Impact, sans-serif;
+            text-transform: uppercase;
+        }
+        #splash .tap-text { font-size: 1.1rem; color: #aaa; margin-top: 10px; }
+        .marquee-wrapper { width: 100%; overflow: hidden; margin-top: 20px; }
+        .marquee-content { display: flex; gap: 25px; animation: scroll 30s linear infinite; width: max-content; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .hub {
+        .hub-container {
             margin-top: 20px;
             padding: 15px;
             background: rgba(18,18,18,0.7);
             border: 1px solid #2a2a2a;
             border-radius: 6px;
         }
-        .server {
+        .server-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -139,353 +134,377 @@
             background: rgba(30,30,30,0.6);
             border-radius: 4px;
             cursor: pointer;
+            transition: background 0.2s;
         }
+        .server-card:hover { background: rgba(40,40,40,0.8); }
+        .server-info { display: flex; align-items: center; gap: 12px; }
         .server-icon {
             width: 48px;
             height: 48px;
             border-radius: 50%;
+            border: 1px solid #333;
             object-fit: cover;
         }
-        .bot-card {
-            background: rgba(25,25,35,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            margin-top: 15px;
-            text-align: center;
-            padding-bottom: 20px;
-        }
-        .bot-banner {
-            width: 100%;
-            height: 120px;
-            background: url("https://i.imgur.com/Ou2c4I0.gif") center/cover;
-        }
-        .bot-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 3px solid #1a1a2e;
-            margin: -45px auto 10px;
-        }
-        .bot-name { font-size: 1.4rem; font-weight: 900; }
-        .bot-role { color: #ff4ef5; font-weight: bold; margin: 10px 0; }
-        .invite-btn {
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            color: white;
-            font-weight: bold;
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        /* ✅ AYOS NA PROFILE MODAL - HINDI NAGPAPATONG */
-        .modal {
+        .server-details h4 { font-size: 0.95rem; color: #fff; margin-bottom: 2px; }
+        .server-details p { font-size: 0.8rem; color: #999; }
+        #serverModal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        .modal-content {
+            width: 100%;
+            max-width: 380px;
+            background: rgba(25,25,25,0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .modal-content h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .modal-content p { font-size: 1rem; color: #aaa; margin-bottom: 25px; }
+        .modal-join {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(45,125,70,0.3);
+            border: 1px solid rgba(45,125,70,0.5);
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .close-modal {
+            margin-top: 20px;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        
+        #profileModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
             display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            z-index: 10000;
+            z-index: 10001;
         }
-        .modal-box {
+        .profile-card {
+            width: 100%;
+            max-width: 300px;
             background: #18181b;
             border-radius: 12px;
+            padding: 25px 20px;
+            text-align: left;
             border: 1px solid #27272a;
-            max-width: 320px;
-            width: 100%;
-            overflow: hidden;
-        }
-        .prof-banner {
-            height: 100px;
-            background: linear-gradient(135deg, #5865F2, #EB459E);
             position: relative;
         }
-        .close {
+        .close-profile {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.5);
+            top: 12px;
+            right: 12px;
+            background: transparent;
             border: none;
-            color: #fff;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            color: #71717a;
+            font-size: 1.4rem;
             cursor: pointer;
-            z-index: 10;
         }
-        /* ✅ INILIPAT ANG AVATAR SA TAMANG POSISYON */
-        .prof-content {
-            padding: 0 20px 20px;
-        }
-        .prof-avatar-wrap {
-            margin-top: -40px;
-            margin-bottom: 12px;
+        .prof-header {
             display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
         }
+        .prof-avatar-wrap { position: relative; }
         .prof-avatar {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            border: 4px solid #18181b;
-            background: #111;
-            position: relative;
+            border: 3px solid #dc2626;
         }
-        .prof-status {
+        .prof-status-big {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
-            width: 20px;
-            height: 20px;
+            bottom: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             border: 3px solid #18181b;
-            background: #777;
+            background: #71717a;
         }
-        .prof-status.on { background: #22c55e; }
-        .prof-status.idle { background: #f59e0b; }
-        .prof-status.dnd { background: #ef4444; }
-        .prof-name {
-            font-size: 1.4rem;
+        .prof-status-big.status-online { background: #22c55e; }
+        .prof-status-big.status-idle { background: #f59e0b; }
+        .prof-status-big.status-dnd { background: #ef4444; }
+        .prof-name-big {
+            font-size: 1.3rem;
             font-weight: 800;
+            color: #fafafa;
             margin-bottom: 2px;
-            color: #fff;
         }
-        .prof-user {
-            color: #aaa;
-            margin-bottom: 15px;
-        }
-        .prof-bio {
-            padding-bottom: 15px;
-            border-bottom: 1px solid #27272a;
-            color: #ddd;
+        .prof-status-text {
             font-size: 0.95rem;
+            color: #a1a1aa;
         }
-        .prof-activity {
-            margin-top: 15px;
+        .prof-activity-box {
+            background: #27272a;
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid #3f3f46;
         }
-        .act-title {
+        .activity-title {
             font-size: 0.75rem;
             font-weight: 600;
             color: #71717a;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
-        .act-box {
-            background: #27272a;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #3f3f46;
+        .activity-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fafafa;
+            margin-bottom: 4px;
+        }
+        .activity-details {
+            font-size: 0.9rem;
             color: #d4d4d8;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-<!-- ✅ SPLASH SCREEN -->
-<div id="splash" onclick="go()">
-    <div class="main">THE WORLD IS YOURS</div>
-    <div class="sub">TAP THE SCREEN</div>
-</div>
-
-<!-- ✅ MAIN CONTENT -->
-<div id="main">
-    <h1> </h1>
-
-    <script>
-    const MY_ID = "1497306715715010620";
-    const MY_LINK = "https://blah-hck.github.io/blah/";
-
-    const listahan = {
-        top: [ {id:"1467935676694532408"}, {id:MY_ID}, {id:"901323764665573437"} ],
-        above: [ {id:"1512264636496351456"}, {id:"1392396268558356534"}, {id:"1495784072029540526"}, {id:"1259504569193463848"}, {id:"1471133660144078910"} ],
-        shotta: [ {id:"1421541305309335643"}, {id:"1470435980170367037"}, {id:"1504842889145090329"} ],
-        days: [ {id:"1513550327335616700"}, {id:"1520237144990285907"}, {id:"1517855862004383916"}, {id:"1368224386192248903"}, {id:"1458081038722138164"}, {id:"1284500317878354043"}, {id:"1364578189153796106"}, {id:"1509144884211351672"}, {id:"1456301481031372905"} ]
-    };
-    </script>
-
-    <div class="section-title">Top Row</div>
-    <div class="grid" id="top"></div>
-
-    <div class="section-title">ABOVE ALL</div>
-    <div class="grid" id="above"></div>
-
-    <div class="section-title">TOP SHOTTA</div>
-    <div class="grid" id="shotta"></div>
-
-    <div class="section-title">DAY ONES</div>
-    <div class="marquee-wrapper"><div class="marquee" id="days"></div></div>
-
-    <div class="section-title">COMMUNITY HUB</div>
-    <div class="hub" id="hub"></div>
-
-    <div class="bot-card">
-        <div class="bot-banner"></div>
-        <img class="bot-avatar" src="https://i.imgur.com/gtHShSn.jpeg">
-        <h2 class="bot-name">1337 SECURITY</h2>
-        <p class="bot-role">[ SECURITY ] • Anti-Raid</p>
-        <p style="padding: 0 15px; color:#aaa;">Moderation, security & utility bot.<br>Gambling Games..</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1529525841153753148&permissions=8&scope=bot+applications.commands" class="invite-btn" target="_blank">✧ INVITE BOT</a>
+    <div id="splash" onclick="hideSplash()">
+        <div class="main-text">THE WORLD IS YOURS</div>
+        <div class="tap-text">TAP THE SCREEN</div>
     </div>
-</div>
 
-<!-- ✅ AYOS NA PROFILE MODAL -->
-<div id="profileModal" class="modal">
-    <div class="modal-box">
-        <div class="prof-banner">
-            <button class="close" onclick="closeProf()">&times;</button>
+    <div class="container">
+        <h1> </h1>
+
+        <script>
+        const MY_PROFILE_ID = "1497306715715010620"; // PURESKILLS
+        const MY_WEBSITE = "https://blah-hck.github.io/blah/"; // BOBO
+
+        const members = {
+            topRow: [ {id: "1467935676694532408"}, {id: MY_PROFILE_ID}, {id: "901323764665573437"} ],
+            aboveAll: [ {id: "1512264636496351456"}, {id: "1392396268558356534"}, {id: "1495784072029540526"}, {id: "1259504569193463848"}, {id: "1471133660144078910"} ],
+            topShotta: [ {id: "1421541305309335643"}, {id: "1470435980170367037"}, {id: "1504842889145090329"} ],
+            dayOnes: [ {id: "1513550327335616700"}, {id: "1520237144990285907"}, {id: "1517855862004383916"}, {id: "1368224386192248903"}, {id: "1458081038722138164"}, {id: "1284500317878354043"}, {id: "1364578189153796106"}, {id: "1509144884211351672"}, {id: "1456301481031372905"} ]
+        };
+        </script>
+
+        <div class="section-title">Top Row</div>
+        <div class="grid" id="topRowGrid"></div>
+
+        <div class="section-title">ABOVE ALL</div>
+        <div class="grid" id="aboveAllGrid"></div>
+
+        <div class="section-title">TOP SHOTTA</div>
+        <div class="grid" id="topShottaGrid"></div>
+
+        <div class="section-title">DAY ONES</div>
+        <div class="marquee-wrapper"><div class="marquee-content" id="dayOnesMarquee"></div></div>
+
+        <div class="section-title">COMMUNITY HUB</div>
+        <div class="hub-container" id="hubContainer"></div>
+    </div>
+
+    <div id="serverModal">
+        <div class="modal-content">
+            <h3 id="modalName"></h3>
+            <p id="modalInfo"></p>
+            <a href="" id="modalLink" target="_blank" class="modal-join">Click Here</a>
+            <br><button class="close-modal" onclick="closeServerModal()">Close</button>
         </div>
-        <div class="prof-content">
-            <div class="prof-avatar-wrap">
-                <div class="prof-avatar">
-                    <img id="pAvatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" src="">
-                    <div class="prof-status" id="pStatus"></div>
+    </div>
+
+    <div id="profileModal">
+        <div class="profile-card">
+            <button class="close-profile" onclick="closeProfileModal()">&times;</button>
+            
+            <div class="prof-header">
+                <div class="prof-avatar-wrap">
+                    <img class="prof-avatar" id="profAvatar">
+                    <div class="prof-status-big" id="profStatusBig"></div>
+                </div>
+                <div>
+                    <h3 class="prof-name-big" id="profNameBig"></h3>
+                    <p class="prof-status-text" id="profStatusText"></p>
                 </div>
             </div>
-            <h3 class="prof-name" id="pName"></h3>
-            <p class="prof-user" id="pUser"></p>
-            <div class="prof-bio" id="pBio"></div>
-            <div class="prof-activity">
-                <h4 class="act-title">STATUS / ACTIVITY</h4>
-                <div id="pAct"></div>
+
+            <div class="prof-activity-box" id="activityBox">
+                <p class="activity-title">STATUS</p>
+                <p class="activity-details">Tulog</p>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ✅ AUDIO -->
-<audio id="musika" loop>
-    <source src="https://www.image2url.com/r2/default/audio/1782390881799-61def1ab-afbd-453d-ae39-f6aff7d67d0b.mp3">
+    <audio id="bgAudio" loop preload="auto" style="display:none;">
+        <source src="https://www.image2url.com/r2/default/audio/1782390881799-61def1ab-afbd-453d-ae39-f6aff7d67d0b.mp3">
+    
 
+    <script>
+        function hideSplash() {
+            const splash = document.getElementById('splash');
+            const audio = document.getElementById('bgAudio');
+            splash.classList.add('fade-out');
+            setTimeout(() => splash.classList.add('hidden'), 500);
+            audio.volume = 0.25;
+            audio.play().catch(e => console.log(e));
+        }
 
-<script>
-// ✅ PAGBUKAS NG SPLASH
-function go() {
-    document.getElementById('splash').classList.add('fade');
-    document.getElementById('main').style.display = 'block';
-    const a = document.getElementById('musika');
-    a.volume = 0.25;
-    a.play().catch(()=>{});
-    loadAll();
-}
+        function formatTime(start) {
+            if(!start) return "";
+            const now = Date.now();
+            const diff = Math.floor((now - start) / 1000);
+            if(diff < 60) return "Just started";
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            if(h > 0) return `${h}h ${m}m elapsed`;
+            return `${m}m elapsed`;
+        }
 
-// ✅ PAGBUKAS NG PROFILE - MALINIS NA AYOS
-function showProf(data, defAvatar) {
-    const u = data?.discord_user;
-    const st = data?.discord_status || 'offline';
+        function openProfile(data, avatar) {
+            const u = data.discord_user;
+            const status = data.discord_status;
+            const statusText = {
+                online: "Online", idle: "Idle", dnd: "Do Not Disturb", offline: "Offline"
+            };
 
-    if (!u) {
-        document.getElementById('pName').innerText = 'Unknown User';
-        document.getElementById('pUser').innerText = '@unknown';
-        document.getElementById('pBio').innerText = 'Walang impormasyon';
-        document.getElementById('pAvatar').src = defAvatar;
-    } else {
-        document.getElementById('pName').innerText = u.global_name || u.username;
-        document.getElementById('pUser').innerText = '@' + u.username;
-        document.getElementById('pBio').innerText = u.bio || 'Walang nakalagay na bio.';
-        document.getElementById('pAvatar').src = u.avatar ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=256` : defAvatar;
-    }
+            document.getElementById('profAvatar').src = avatar;
+            const statusEl = document.getElementById('profStatusBig');
+            statusEl.className = "prof-status-big";
+            if(status === 'online') statusEl.classList.add('status-online');
+            if(status === 'idle') statusEl.classList.add('status-idle');
+            if(status === 'dnd') statusEl.classList.add('status-dnd');
+            document.getElementById('profStatusText').textContent = statusText[status];
+            document.getElementById('profNameBig').textContent = u.global_name || u.username;
 
-    // Status
-    const statusEl = document.getElementById('pStatus');
-    statusEl.className = 'prof-status';
-    if(st==='online') statusEl.classList.add('on');
-    else if(st==='idle') statusEl.classList.add('idle');
-    else if(st==='dnd') statusEl.classList.add('dnd');
+            const actBox = document.getElementById('activityBox');
+            let finalHtml = `<p class="activity-title">CURRENT STATUS</p><p class="activity-details">Watching Pornhub.com</p>`;
 
-    // Activity
-    let actHtml = '';
-    if(data?.activities?.length>0){
-        data.activities.forEach(act=>{
-            let icon = act.type===2 ? '🎵' : act.type===0 ? '🎮' : '🔹';
-            actHtml += `<div class="act-box"><b>${icon} ${act.name}</b><br>${act.details||''} ${act.state||''}</div>`;
-        });
-    } else actHtml = '<div class="act-box">Walang aktibidad</div>';
-    document.getElementById('pAct').innerHTML = actHtml;
+            if(data.activities && data.activities.length > 0) {
+                const spotifyAct = data.activities.find(a => a.type === 2 || a.name === "Spotify");
+                const gameAct = data.activities.find(a => a.type === 0);
 
-    document.getElementById('profileModal').style.display = 'flex';
-}
+                if(spotifyAct) {
+                    finalHtml = `
+                        <p class="activity-title">🎵 LISTENING TO SPOTIFY</p>
+                        <p class="activity-name">${spotifyAct.details || "Unknown Track"}</p>
+                        <p class="activity-details">by ${spotifyAct.state || "Unknown Artist"}</p>
+                    `;
+                } else if(gameAct) {
+                    let gameName = gameAct.name;
+                    if(gameName.toLowerCase().includes("roblox")) gameName = "ROBLOX";
+                    else if(gameName.toLowerCase().includes("fivem") || gameName.toLowerCase().includes("gta")) gameName = "FiveM / GTA V";
 
-function closeProf(){ document.getElementById('profileModal').style.display='none'; }
-
-// ✅ GUMAWA NG USER CARD
-async function card(userId) {
-    const el = document.createElement('div');
-    el.className = 'user-card';
-    let avatar = 'https://cdn.discordapp.com/embed/avatars/0.png';
-    let name = '...';
-    let statusClass = '';
-    let userData = null;
-
-    try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-        const json = await res.json();
-        if(json.success){
-            userData = json.data;
-            const u = json.data.discord_user;
-            if(u){
-                name = u.global_name || u.username;
-                if(u.avatar) avatar = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`;
+                    const timeText = formatTime(gameAct.timestamps?.start);
+                    finalHtml = `
+                        <p class="activity-title">🎮 PLAYING</p>
+                        <p class="activity-name">${gameName}</p>
+                        ${gameAct.details ? `<p class="activity-details">${gameAct.details}</p>` : ""}
+                        ${timeText ? `<p class="activity-details">${timeText}</p>` : ""}
+                    `;
+                } else {
+                    const act = data.activities[0];
+                    finalHtml = `
+                        <p class="activity-title">ACTIVITY</p>
+                        <p class="activity-name">${act.name}</p>
+                    `;
+                }
             }
-            const s = json.data.discord_status;
-            if(s==='online') statusClass='on';
-            else if(s==='idle') statusClass='idle';
-            else if(s==='dnd') statusClass='dnd';
-        } else name = 'Unknown';
-    } catch { name = 'Unknown'; }
+            actBox.innerHTML = finalHtml;
+            document.getElementById('profileModal').style.display = 'flex';
+        }
 
-    el.innerHTML = `
-        <div class="avatar-wrap">
-            <img class="avatar" src="${avatar}">
-            <div class="status ${statusClass}"></div>
-        </div>
-        <div class="username">${name}</div>
-    `;
+        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+        function closeServerModal() { document.getElementById('serverModal').style.display = 'none'; }
+        window.onclick = e => {
+            if(e.target === document.getElementById('profileModal')) closeProfileModal();
+            if(e.target === document.getElementById('serverModal')) closeServerModal();
+        }
 
-    el.onclick = () => {
-        if(userId === MY_ID) window.open(MY_LINK, '_blank');
-        else showProf(userData, avatar);
-    };
-    return el;
-}
+        async function makeCard(userId) {
+            const card = document.createElement("div");
+            card.className = "user-card";
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                const data = await res.json();
+                const d = data.data;
+                const avatar = d.discord_user.avatar 
+                    ? `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=128`
+                    : "https://cdn.discordapp.com/embed/avatars/0.png";
 
-async function draw(id, list) {
-    const wrap = document.getElementById(id);
-    for(const u of list) wrap.appendChild(await card(u.id));
-}
-async function drawMarq(list) {
-    const wrap = document.getElementById('days');
-    for(let i=0;i<2;i++) for(const u of list) wrap.appendChild(await card(u.id));
-}
+                card.innerHTML = `
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="${avatar}">
+                        <div class="status-dot status-${d.discord_status}"></div>
+                    </div>
+                    <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
+                `;
 
-async function loadAll() {
-    await draw('top', listahan.top);
-    await draw('above', listahan.above);
-    await draw('shotta', listahan.shotta);
-    await drawMarq(listahan.days);
+                // #4REEL
+                if(userId === MY_PROFILE_ID) {
+                    card.onclick = () => window.open(MY_WEBSITE, "_blank");
+                } else {
+                    // #4REEL
+                    card.onclick = () => openProfile(d, avatar);
+                }
+            } catch {
+                card.innerHTML = `
+                    <div class="avatar-wrap"><img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png"><div class="status-dot"></div></div>
+                    <div class="username">Unavailable</div>
+                `;
+            }
+            return card;
+        }
 
-    // Servers
-    const servers = [
-        {n:"BLAH #ALBTHAX",i:"Ty7qb4thSs",g:"1504217597900755075",ico:"335c5d2498dbf8b0ab834b022710c86a",d:"Hax Enjoyer"},
-        {n:"KNA SAYIN #4REEL",i:"BWptZKj8mN",g:"1525845358436028506",ico:"e887897782e8b475e023ee5b64f53703",d:"#4REEL"}
-    ];
-    const hub = document.getElementById('hub');
-    servers.forEach(s=>{
-        const sx = document.createElement('div'); sx.className='server';
-        sx.innerHTML = `
-            <div style="display:flex;align-items:center;gap:12px;">
-                <img class="server-icon" src="https://cdn.discordapp.com/icons/${s.g}/${s.ico}.png?size=128">
-                <div><b>${s.n}</b><br><small style="color:#aaa">${s.d}</small></div>
-            </div>
-        `;
-        sx.onclick = ()=> window.open(`https://discord.gg/${s.i}`, '_blank');
-        hub.appendChild(sx);
-    });
-}
-</script>
+        async function renderGrid(id, list) {
+            const grid = document.getElementById(id);
+            for(const u of list) grid.appendChild(await makeCard(u.id));
+        }
+        async function renderMarquee(list) {
+            const box = document.getElementById("dayOnesMarquee");
+            for(let i=0; i<2; i++) for(const u of list) box.appendChild(await makeCard(u.id));
+        }
+        async function loadAll() {
+            renderGrid("topRowGrid", members.topRow);
+            renderGrid("aboveAllGrid", members.aboveAll);
+            renderGrid("topShottaGrid", members.topShotta);
+            renderMarquee(members.dayOnes);
+        }
+        loadAll();
+
+        const allyServers = [
+            { name: "BLAH #ALBTHAX", invite: "Ty7qb4thSs", guildId: "1504217597900755075", icon: "335c5d2498dbf8b0ab834b022710c86a", description: "Hax Enjoyer" },
+            { name: "KNA SAYIN #4REEL", invite: "BWptZKj8mN", guildId: "1525845358436028506", icon: "e887897782e8b475e023ee5b64f53703", description: "#4REEL" }
+        ];
+        const container = document.getElementById('hubContainer');
+        allyServers.forEach(server => {
+            const iconUrl = `https://cdn.discordapp.com/icons/${server.guildId}/${server.icon}.png?size=128`;
+            const card = document.createElement('div');
+            card.className = 'server-card';
+            card.innerHTML = `
+                <div class="server-info"><img class="server-icon" src="${iconUrl}"><div class="server-details"><h4>${server.name}</h4><p>${server.description}</p></div></div>
+            `;
+            card.onclick = () => {
+                document.getElementById('modalName').textContent = server.name;
+                document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
+                document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
+                document.getElementById('serverModal').style.display = 'flex';
+            };
+            container.appendChild(card);
+        });
+    </script>
 </body>
 </html>
