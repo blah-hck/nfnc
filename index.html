@@ -207,8 +207,14 @@
         }
         .profile-banner {
             height: 100px;
-            background: linear-gradient(135deg, #5865F2, #EB459E);
+            background: #36393f;
             position: relative;
+        }
+        .profile-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .close-profile {
             position: absolute;
@@ -271,6 +277,7 @@
             padding-bottom: 15px;
             border-bottom: 1px solid #27272a;
             min-height: 40px;
+            white-space: pre-wrap;
         }
         .prof-activity {
             margin-top: 15px;
@@ -345,6 +352,7 @@
     <div id="profileModal">
         <div class="profile-card">
             <div class="profile-banner">
+                <img class="profile-banner-img" id="profBanner" src="" alt="">
                 <button class="close-profile" onclick="closeProfileModal()">&times;</button>
             </div>
             <div class="prof-body">
@@ -354,10 +362,10 @@
                 </div>
                 <h3 class="prof-name" id="profName">Unknown User</h3>
                 <p class="prof-tag" id="profTag">@unknown</p>
-                <div class="prof-bio" id="profBio">No Activity</div>
+                <div class="prof-bio" id="profBio"></div>
                 <div class="prof-activity">
                     <p class="act-title">STATUS / ACTIVITY</p>
-                    <div class="act-box" id="profAct">No Activity</div>
+                    <div class="act-box" id="profAct"></div>
                 </div>
             </div>
         </div>
@@ -390,11 +398,16 @@
                 document.getElementById('profAvatar').src = user.avatar 
                     ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256` 
                     : defAvatar;
+                // ✅ BANNER GALING SA DISCORD
+                document.getElementById('profBanner').src = user.banner 
+                    ? `https://cdn.discordapp.com/users/${user.id}/${user.banner}.png?size=512` 
+                    : '';
             } else {
                 document.getElementById('profName').innerText = 'Unknown User';
                 document.getElementById('profTag').innerText = '@unknown';
                 document.getElementById('profBio').innerText = '';
                 document.getElementById('profAvatar').src = defAvatar;
+                document.getElementById('profBanner').src = '';
             }
 
             
@@ -405,7 +418,7 @@
             else if(status === 'dnd') statusEl.classList.add('status-dnd');
 
             
-            let actHtml = '<p class="activity-details">Walang aktibidad</p>';
+            let actHtml = ''; // ✅ TINANGAL ANG "WALANG AKTIBIDAD"
             if (data?.activities?.length > 0) {
                 const act = data.activities[0];
                 let icon = act.type === 2 ? '🎵' : act.type === 0 ? '🎮' : '🔹';
