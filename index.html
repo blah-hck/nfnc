@@ -185,8 +185,8 @@
             font-size: 0.9rem;
             cursor: pointer;
         }
-
-        /* ✅ PERFECT PROFILE - HANDANG-HANDA SA MGA BANNER */
+        
+        
         #profileModal {
             position: fixed;
             inset: 0;
@@ -208,7 +208,7 @@
         }
         .profile-banner {
             height: 100px;
-            background: #2b2d31; /* ✅ DEFAULT KULAY KUNG WALANG BANNER */
+            background: #2b2d31;
             position: relative;
             overflow: hidden;
         }
@@ -216,7 +216,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* ✅ ITATAGO KUNG WALANG BANNER */
+            display: none;
         }
         .close-profile {
             position: absolute;
@@ -293,6 +293,94 @@
             color: #b9bbbe;
             margin-top: 4px;
         }
+
+        
+        .bot-section {
+            margin-top: 30px;
+            background: linear-gradient(180deg, #000 0%, #111 100%);
+            border: 1px solid #ff00ff40;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 20px #ff00ff20;
+        }
+        .bot-banner {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-bottom: 2px solid #00ffff40;
+        }
+        .bot-avatar-wrap {
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+        .bot-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            object-fit: cover;
+            box-shadow: 0 0 15px #00ffff70;
+        }
+        .bot-name {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .bot-role {
+            color: #ff00ff;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .bot-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .bot-tag {
+            background: #00ffff20;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .bot-desc {
+            padding: 0 20px 15px;
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .bot-desc .verified {
+            color: #00ffff;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        .invite-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: linear-gradient(90deg, #00ffff, #0088ff);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 900;
+            font-size: 1rem;
+            text-decoration: none;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px #00ffff50;
+            transition: transform 0.2s;
+        }
+        .invite-btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -332,6 +420,30 @@
 
         <div class="section-title">COMMUNITY HUB</div>
         <div class="hub-container" id="hubContainer"></div>
+
+
+        
+        <div class="bot-section">
+            <img src="https://i.imgur.com/Ou2c4I0.gif" alt="Bot Banner" class="bot-banner">
+            <div class="bot-avatar-wrap">
+                <img src="https://i.imgur.com/gtHShSn.jpeg" alt="Bot Avatar" class="bot-avatar">
+            </div>
+            <h2 class="bot-name">1337 SECURITY</h2>
+            <p class="bot-role">Anti-Raid • Protection</p>
+            <div class="bot-tags">
+                <span class="bot-tag">MODERATION</span>
+                <span class="bot-tag">SECURITY</span>
+                <span class="bot-tag">UTILITY</span>
+            </div>
+            <div class="bot-desc">
+                <span class="verified">✓ VERIFIED</span>
+                Moderation, security & utility bot for your server ecosystem.
+                <br><br>
+                <strong style="color:#ff00ff;">Features:</strong> Anti-Nuke, Anti-Raid, Auto-Moderation, Gambling Games & more...
+            </div>
+            <a href="https://discord.com/oauth2/authorize?client_id=1529525841153753148&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" class="invite-btn">⬥ INVITE BOT</a>
+        </div>
+
     </div>
 
     <div id="serverModal">
@@ -389,19 +501,19 @@
             const user = data?.discord_user || {};
             const status = data?.discord_status || 'offline';
 
-            // ✅ PANGALAN & TAG
+            
             document.getElementById('profName').innerText = user.global_name || user.username || 'Unknown';
             document.getElementById('profTag').innerText = '@' + (user.username || 'unknown');
 
-            // ✅ BADGE
+            
             document.getElementById('badgeText').innerText = '1337';
 
-            // ✅ AVATAR
+            
             document.getElementById('profAvatar').src = user.avatar 
                 ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256` 
                 : defAvatar;
             
-            // ✅ BANNER LOGIC: KUNG MERON, LALABAS PERFECT; KUNG WALA, WALANG ERROR
+            
             const bannerImg = document.getElementById('profBanner');
             if (user.banner) {
                 bannerImg.src = `https://cdn.discordapp.com/users/${user.id}/${user.banner}.png?size=512`;
@@ -410,7 +522,7 @@
                 bannerImg.style.display = 'none';
             }
 
-            // ✅ STATUS
+            
             const statusEl = document.getElementById('profStatusBig');
             statusEl.className = 'prof-status-big';
             if (status === 'online') statusEl.classList.add('status-online');
@@ -453,63 +565,4 @@
                 card.innerHTML = `
                     <div class="avatar-wrap">
                         <img class="avatar" src="${avatarUrl}" loading="lazy">
-                        <div class="status-dot status-${d.discord_status || 'offline'}"></div>
-                    </div>
-                    <div class="username">${d.discord_user?.global_name || d.discord_user?.username || '???'}</div>
-                `;
-
-                card.onclick = () => {
-                    if(userId === MY_PROFILE_ID) window.open(MY_WEBSITE, "_blank");
-                    else openProfile(d, avatarUrl);
-                };
-            } catch {
-                card.innerHTML = `
-                    <div class="avatar-wrap">
-                        <img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png">
-                        <div class="status-dot"></div>
-                    </div>
-                    <div class="username">Unknown</div>
-                `;
-                card.onclick = () => openProfile(null, "https://cdn.discordapp.com/embed/avatars/0.png");
-            }
-            return card;
-        }
-
-        async function renderGrid(id, list) {
-            const grid = document.getElementById(id);
-            for(const u of list) grid.appendChild(await makeCard(u.id));
-        }
-        async function renderMarquee(list) {
-            const box = document.getElementById("dayOnesMarquee");
-            for(let i=0; i<2; i++) for(const u of list) box.appendChild(await makeCard(u.id));
-        }
-        async function loadAll() {
-            renderGrid("topRowGrid", members.topRow);
-            renderGrid("aboveAllGrid", members.aboveAll);
-            renderGrid("topShottaGrid", members.topShotta);
-            renderMarquee(members.dayOnes);
-        }
-        loadAll();
-
-        const allyServers = [
-            { name: "BLAH #ALBTHAX", invite: "Ty7qb4thSs", guildId: "1504217597900755075", icon: "335c5d2498dbf8b0ab834b022710c86a", description: "Hax Enjoyer" },
-            { name: "KNA SAYIN #4REEL", invite: "BWptZKj8mN", guildId: "1525845358436028506", icon: "e887897782e8b475e023ee5b64f53703", description: "#4REEL" }
-        ];
-        const container = document.getElementById('hubContainer');
-        allyServers.forEach(server => {
-            const iconUrl = `https://cdn.discordapp.com/icons/${server.guildId}/${server.icon}.png?size=128`;
-            const card = document.createElement('div');
-            card.className = 'server-card';
-            card.innerHTML = `
-                <div class="server-info"><img class="server-icon" src="${iconUrl}"><div class="server-details"><h4>${server.name}</h4><p>${server.description}</p></div></div>
-            `;
-            card.onclick = () => {
-                document.getElementById('modalName').textContent = server.name;
-                document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
-                document.getElementById('serverModal').style.display = 'flex';
-            };
-            container.appendChild(card);
-        });
-    </script>
-</body>
-</html>
+          
