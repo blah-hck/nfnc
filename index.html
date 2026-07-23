@@ -186,28 +186,30 @@
             cursor: pointer;
         }
 
-        
+        /* ✅ PINAKAMALINIS NA PROFILE */
         #profileModal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.4);
             display: none;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             z-index: 10001;
         }
         .profile-card {
             width: 100%;
             max-width: 320px;
-            background: #18181b;
-            border-radius: 12px;
+            background: rgba(35, 36, 41, 0.7);
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #27272a;
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
         }
+        /* ✅ BANNER GALING DISCORD */
         .profile-banner {
             height: 100px;
-            background: #36393f;
+            background: rgba(50, 52, 58, 0.4);
             position: relative;
         }
         .profile-banner-img {
@@ -220,83 +222,85 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
             border: none;
             color: #fff;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
-            z-index: 2;
         }
         .prof-body {
-            padding: 0 20px 20px;
+            padding: 0 20px 25px;
             margin-top: -40px;
+            position: relative;
         }
-        .prof-avatar-wrap {
+        .avatar-container {
             position: relative;
             width: 80px;
             height: 80px;
-            margin-bottom: 12px;
         }
         .prof-avatar {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 4px solid #18181b;
-            background: #111;
+            border: 4px solid rgba(35, 36, 41, 0.9);
+            background: #333;
+            object-fit: cover;
+        }
+        .prof-decoration {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            pointer-events: none;
+            display: none;
         }
         .prof-status-big {
             position: absolute;
             bottom: 4px;
             right: 4px;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            border: 3px solid #18181b;
-            background: #71717a;
+            border: 3px solid rgba(35, 36, 41, 0.9);
+            background: #72767d;
         }
-        .prof-status-big.status-online { background: #22c55e; }
-        .prof-status-big.status-idle { background: #f59e0b; }
-        .prof-status-big.status-dnd { background: #ef4444; }
+        .prof-status-big.status-online { background: #23a559; }
+        .prof-status-big.status-idle { background: #f0b132; }
+        .prof-status-big.status-dnd { background: #f23f43; }
+
+        .prof-header { margin-top: 15px; text-align: left; }
+        .prof-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
         .prof-name {
             font-size: 1.4rem;
-            font-weight: 800;
-            color: #fafafa;
-            margin-bottom: 2px;
+            font-weight: 700;
+            color: #ffffff;
         }
+        /* ✅ SERVER TAG 1337 */
+        .prof-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(50, 52, 58, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            color: #fff;
+        }
+        .badge-icon { color: #ffcc00; }
         .prof-tag {
             font-size: 0.95rem;
-            color: #a1a1aa;
-            margin-bottom: 15px;
-        }
-        .prof-bio {
-            font-size: 0.95rem;
-            color: #d4d4d8;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #27272a;
-            min-height: 40px;
-            white-space: pre-wrap;
-        }
-        .prof-activity {
-            margin-top: 15px;
-        }
-        .act-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #71717a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-        .act-box {
-            background: #27272a;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #3f3f46;
-            color: #d4d4d8;
-            font-size: 0.9rem;
+            color: #b9bbbe;
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -351,22 +355,29 @@
     
     <div id="profileModal">
         <div class="profile-card">
+            <!-- ✅ BANNER GALLING DISCORD -->
             <div class="profile-banner">
-                <img class="profile-banner-img" id="profBanner" src="" alt="">
+                <img class="profile-banner-img" id="profBanner" src="https://i.imgur.com/9t8sQrX.gif" alt="">
                 <button class="close-profile" onclick="closeProfileModal()">&times;</button>
             </div>
             <div class="prof-body">
-                <div class="prof-avatar-wrap">
+                <div class="avatar-container">
+                    <img class="prof-decoration" id="profDeco" src="" alt="">
                     <img class="prof-avatar" id="profAvatar" src="">
                     <div class="prof-status-big" id="profStatusBig"></div>
                 </div>
-                <h3 class="prof-name" id="profName">Unknown User</h3>
-                <p class="prof-tag" id="profTag">@unknown</p>
-                <div class="prof-bio" id="profBio"></div>
-                <div class="prof-activity">
-                    <p class="act-title">STATUS / ACTIVITY</p>
-                    <div class="act-box" id="profAct"></div>
+
+                <div class="prof-header">
+                    <div class="prof-name-row">
+                        <h3 class="prof-name" id="profName">—</h3>
+                        <div class="prof-badge">
+                            <span class="badge-icon">⚡</span>
+                            <span id="badgeText">1337</span>
+                        </div>
+                    </div>
+                    <p class="prof-tag" id="profTag">@username</p>
                 </div>
+                <!-- ✅ WALA NANG BIO AT ACTIVITY -->
             </div>
         </div>
     </div>
@@ -387,48 +398,39 @@
 
         
         function openProfile(data, defAvatar) {
-            const user = data?.discord_user;
+            const user = data?.discord_user || {};
             const status = data?.discord_status || 'offline';
 
             
-            if (user) {
-                document.getElementById('profName').innerText = user.global_name || user.username;
-                document.getElementById('profTag').innerText = '@' + user.username;
-                document.getElementById('profBio').innerText = user.bio || '';
-                document.getElementById('profAvatar').src = user.avatar 
-                    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256` 
-                    : defAvatar;
-                // ✅ BANNER GALING SA DISCORD
-                document.getElementById('profBanner').src = user.banner 
-                    ? `https://cdn.discordapp.com/users/${user.id}/${user.banner}.png?size=512` 
-                    : '';
+            document.getElementById('profName').innerText = user.global_name || user.username || 'Unknown';
+            document.getElementById('profTag').innerText = '@' + (user.username || 'unknown');
+
+            
+            document.getElementById('badgeText').innerText = '1337';
+
+            
+            document.getElementById('profAvatar').src = user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256` : defAvatar;
+            
+            
+            const bannerImg = document.getElementById('profBanner');
+            if (user.banner) {
+                bannerImg.src = `https://cdn.discordapp.com/users/${user.id}/${user.banner}.png?size=512`;
             } else {
-                document.getElementById('profName').innerText = 'Unknown User';
-                document.getElementById('profTag').innerText = '@unknown';
-                document.getElementById('profBio').innerText = '';
-                document.getElementById('profAvatar').src = defAvatar;
-                document.getElementById('profBanner').src = '';
+                bannerImg.src = "https://i.imgur.com/9t8sQrX.gif";
             }
+
+            
+            const deco = document.getElementById('profDeco');
+            if (user.avatar_decoration) { deco.src = `https://cdn.discordapp.com/avatar-decorations/${user.id}/${user.avatar_decoration}.png?size=512`; deco.style.display = 'block'; }
+            else deco.style.display = 'none';
 
             
             const statusEl = document.getElementById('profStatusBig');
             statusEl.className = 'prof-status-big';
-            if(status === 'online') statusEl.classList.add('status-online');
-            else if(status === 'idle') statusEl.classList.add('status-idle');
-            else if(status === 'dnd') statusEl.classList.add('status-dnd');
+            if (status === 'online') statusEl.classList.add('status-online');
+            else if (status === 'idle') statusEl.classList.add('status-idle');
+            else if (status === 'dnd') statusEl.classList.add('status-dnd');
 
-            
-            let actHtml = ''; // ✅ TINANGAL ANG "WALANG AKTIBIDAD"
-            if (data?.activities?.length > 0) {
-                const act = data.activities[0];
-                let icon = act.type === 2 ? '🎵' : act.type === 0 ? '🎮' : '🔹';
-                actHtml = `
-                    <p class="activity-name">${icon} ${act.name || 'Aktibidad'}</p>
-                    ${act.details ? `<p class="activity-details">${act.details}</p>` : ''}
-                    ${act.state ? `<p class="activity-details">${act.state}</p>` : ''}
-                `;
-            }
-            document.getElementById('profAct').innerHTML = actHtml;
             document.getElementById('profileModal').style.display = 'flex';
         }
 
@@ -444,8 +446,7 @@
             const card = document.createElement("div");
             card.className = "user-card";
 
-            
-            if (!userId || userId.trim() === "") {
+            if (!userId || !userId.trim()) {
                 card.innerHTML = `
                     <div class="avatar-wrap">
                         <img class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png">
@@ -457,26 +458,23 @@
                 return card;
             }
 
-            
             try {
                 const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
                 const data = await res.json();
-                const d = data.data;
-                const avatar = d.discord_user.avatar 
-                    ? `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=128`
-                    : "https://cdn.discordapp.com/embed/avatars/0.png";
+                const d = data.data || {};
+                const avatarUrl = d.discord_user?.avatar ? `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=128` : "https://cdn.discordapp.com/embed/avatars/0.png";
 
                 card.innerHTML = `
                     <div class="avatar-wrap">
-                        <img class="avatar" src="${avatar}">
+                        <img class="avatar" src="${avatarUrl}" loading="lazy">
                         <div class="status-dot status-${d.discord_status || 'offline'}"></div>
                     </div>
-                    <div class="username">${d.discord_user.global_name || d.discord_user.username}</div>
+                    <div class="username">${d.discord_user?.global_name || d.discord_user?.username || '???'}</div>
                 `;
 
                 card.onclick = () => {
                     if(userId === MY_PROFILE_ID) window.open(MY_WEBSITE, "_blank");
-                    else openProfile(d, avatar);
+                    else openProfile(d, avatarUrl);
                 };
             } catch {
                 card.innerHTML = `
@@ -522,7 +520,6 @@
             card.onclick = () => {
                 document.getElementById('modalName').textContent = server.name;
                 document.getElementById('modalInfo').textContent = `Join our community: ${server.description}`;
-                document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
                 document.getElementById('serverModal').style.display = 'flex';
             };
             container.appendChild(card);
